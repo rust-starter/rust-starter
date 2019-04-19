@@ -5,8 +5,8 @@ extern crate human_panic;
 #[macro_use]
 extern crate clap;
 
-pub mod utils;
 pub mod commands;
+pub mod utils;
 
 use clap::App;
 use clap::AppSettings;
