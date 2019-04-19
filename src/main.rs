@@ -1,1 +1,4 @@
-fn main() {}
+extern crate core;
+
+fn main() {
+}

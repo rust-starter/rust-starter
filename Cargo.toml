@@ -14,3 +14,4 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 [workspace]
 
 [dependencies]
+core = { path = "core" }

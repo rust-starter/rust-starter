@@ -1,0 +1,25 @@
+[package]
+name = "core"
+version = "0.0.1"
+authors = ["Abid Omar <contact@omarabid.com>"]
+description = "The application core code"
+edition = "2018"
+
+[dependencies]
+human-panic = "1.0.1"
+dotenv = "0.13.0"
+failure = "0.1.5"
+dirs = "1.0.4"
+toml = "0.4.10"
+serde = "1.0.87"
+serde_derive = "1.0.87"
+lazy_static = "1.2.0"
+slog = "2.4.1"
+slog-syslog = "0.11.0"
+
+[dependencies.clap]
+version = "2.32.0"
+features = ["yaml"]
+
+[dev-dependencies]
+assert_cmd = "0.11.0"
