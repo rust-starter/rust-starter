@@ -34,7 +34,9 @@ impl fmt::Display for Error {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Fail)]
-pub enum ErrorKind {}
+pub enum ErrorKind {
+    OnPurpose,
+}
 
 impl fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
