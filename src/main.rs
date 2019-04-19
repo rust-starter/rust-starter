@@ -1,4 +1,7 @@
 extern crate core;
 
-fn main() {
+use core::utils::error::Result as Result;
+
+fn main() -> Result<()>{
+    core::start()
 }
