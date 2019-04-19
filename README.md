@@ -1,7 +1,7 @@
 Rust Starter
 ============
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/omarabid/rust-starter/blob/master/LICENSE) 
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/omarabid/rust-starter/blob/master/LICENSE) [![CircleCI](https://circleci.com/gh/omarabid/rust-starter.svg?style=svg)](https://circleci.com/gh/omarabid/rust-starter)
 
 Rust Starter aims to provide high quality components to bootstrap your Rust CLI Project. It includes a battery of most used libraries; and defines a set of Rust best practices.
 
