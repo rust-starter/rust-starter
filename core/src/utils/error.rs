@@ -56,6 +56,6 @@ impl From<ErrorKind> for Error {
 
 impl From<Context<ErrorKind>> for Error {
     fn from(inner: failure::Context<ErrorKind>) -> Error {
-        Error { inner: inner }
+        Error { inner }
     }
 }

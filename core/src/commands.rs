@@ -6,7 +6,11 @@ pub fn match_cmd(cli_matches: clap::ArgMatches) -> Result<()> {
             cmd_config()?;
         }
         _ => {
-            // Args Required
+            // Arguments are required by default (in Clap)
+            // This section should never execute and thus 
+            // should be logged in case it executed. temporarily
+            // a print statement.
+            println!("This should never execute");
         }
     }
 

@@ -1,4 +1,3 @@
-#[macro_use]
 pub extern crate failure;
 #[macro_use]
 extern crate human_panic;
