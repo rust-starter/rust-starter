@@ -11,5 +11,7 @@ args:
         help: Set a custom config file.
         takes_value: true
 subcommands: 
+    - hazard:
+        about: Generate a hazardous occurance
     - config:
         about: Display the config file contents.

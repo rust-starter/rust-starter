@@ -7,9 +7,11 @@ extern crate clap;
 extern crate slog;
 
 extern crate slog_syslog;
+extern crate rand;
 
 pub mod commands;
 pub mod utils;
+pub mod hazard;
 
 use clap::App;
 use clap::AppSettings;

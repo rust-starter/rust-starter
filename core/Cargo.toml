@@ -16,6 +16,7 @@ serde_derive = "1.0.87"
 lazy_static = "1.2.0"
 slog = "2.4.1"
 slog-syslog = "0.11.0"
+rand = "0.6"
 
 [dependencies.clap]
 version = "2.32.0"
