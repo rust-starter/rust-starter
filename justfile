@@ -5,7 +5,7 @@ debug TEST:
 	cargo test --test {{TEST}} --features debug
 
 run-tests:
-	cargo test 
+	cargo test --all
 
 bench: 
 	cargo bench 

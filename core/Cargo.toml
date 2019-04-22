@@ -23,4 +23,5 @@ version = "2.32.0"
 features = ["yaml"]
 
 [dev-dependencies]
-assert_cmd = "0.11.0"
+assert_cmd = "0.11"
+predicates = "1.0.1"

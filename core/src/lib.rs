@@ -1,4 +1,3 @@
-pub extern crate failure;
 #[macro_use]
 extern crate human_panic;
 #[macro_use]
@@ -6,6 +5,7 @@ extern crate clap;
 #[macro_use]
 extern crate slog;
 
+pub extern crate failure;
 extern crate slog_syslog;
 extern crate rand;
 
