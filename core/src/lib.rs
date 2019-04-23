@@ -6,12 +6,12 @@ extern crate clap;
 extern crate slog;
 
 pub extern crate failure;
-extern crate slog_syslog;
 extern crate rand;
+extern crate slog_syslog;
 
 pub mod commands;
-pub mod utils;
 pub mod hazard;
+pub mod utils;
 
 use clap::App;
 use clap::AppSettings;
@@ -21,8 +21,11 @@ use slog_syslog::Facility;
 use utils::error::Result;
 
 pub fn start() -> Result<()> {
-    // Setup human-panic
-    setup_panic!();
+    #[cfg(not(debug_assertions))]
+    {
+        // Setup human-panic
+        setup_panic!();
+    }
 
     // Setup Logging
     let syslog = slog_syslog::unix_3164(Facility::LOG_USER).unwrap();
