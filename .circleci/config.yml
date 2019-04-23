@@ -27,4 +27,4 @@ jobs:
           key: v4-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
       - run:
           name: Run all tests
-          command: RUST_BACKTRACE=1 cargo test --all
+          command: RUST_BACKTRACE=full cargo test --all
