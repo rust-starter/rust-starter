@@ -11,12 +11,12 @@ dotenv = "0.13.0"
 failure = "0.1.5"
 dirs = "1.0.4"
 toml = "0.4.10"
-serde = "1.0.87"
-serde_derive = "1.0.87"
 lazy_static = "1.2.0"
 slog = "2.4.1"
 slog-syslog = "0.11.0"
 rand = "0.6"
+config = "0.9"
+serde = { version = "1.0", features = ["derive"]}
 
 [dependencies.clap]
 version = "2.32.0"
