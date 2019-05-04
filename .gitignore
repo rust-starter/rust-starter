@@ -3,3 +3,4 @@ Cargo.lock
 **/*.rs.bk
 /target
 .cache
+custom_config.toml

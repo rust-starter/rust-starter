@@ -35,6 +35,7 @@ impl fmt::Display for Error {
 
 #[derive(Debug, Copy, Clone, PartialEq, Fail)]
 pub enum ErrorKind {
+    ConfigError,
     OnPurpose,
 }
 
@@ -57,5 +58,13 @@ impl From<ErrorKind> for Error {
 impl From<Context<ErrorKind>> for Error {
     fn from(inner: failure::Context<ErrorKind>) -> Error {
         Error { inner }
+    }
+}
+
+impl From<config::ConfigError> for Error {
+    fn from(err: config::ConfigError) -> Self {
+        Error {
+            inner: err.context(ErrorKind::ConfigError),
+        }
     }
 }

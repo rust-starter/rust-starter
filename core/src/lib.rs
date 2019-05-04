@@ -4,8 +4,12 @@ extern crate human_panic;
 extern crate clap;
 #[macro_use]
 extern crate slog;
+#[macro_use]
+extern crate serde;
 
 pub extern crate failure;
+
+extern crate config;
 extern crate rand;
 extern crate slog_syslog;
 
@@ -18,6 +22,8 @@ use clap::AppSettings;
 use slog::Drain;
 use slog_syslog::Facility;
 
+use std::collections::HashMap;
+use utils::config::AppConfig;
 use utils::error::Result;
 
 pub fn start() -> Result<()> {
@@ -45,6 +51,9 @@ pub fn start() -> Result<()> {
 
     // Get matches
     let cli_matches = cli_app.get_matches();
+
+    // Setup default Settings
+    let mut settings = AppConfig::new(cli_matches.value_of("config"))?;
 
     // Matches Commands or display help
     commands::match_cmd(cli_matches)?;
