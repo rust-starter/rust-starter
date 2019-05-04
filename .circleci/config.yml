@@ -17,7 +17,7 @@ jobs:
             - v4-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
       - run:
           name: Build all targets
-          command: cargo build --all --all-targets
+          command: cargo build --all
       - save_cache:
           paths:
             - /usr/local/cargo/registry
