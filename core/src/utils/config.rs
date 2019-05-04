@@ -1,5 +1,4 @@
-use config::{Config, ConfigError, Environment};
-use std::env;
+use config::{Config, Environment};
 
 use super::error::Result;
 
@@ -18,11 +17,11 @@ impl AppConfig {
     pub fn new(config_file: Option<&str>) -> Result<Self> {
         let contents = include_str!("../resources/default_config.toml");
 
-        let mut settings = config::Config::new();
+        let mut settings = Config::new();
 
         settings
             .merge(config::File::from_str(&contents, config::FileFormat::Toml))?
-            .merge(config::Environment::with_prefix("APP"))?;
+            .merge(Environment::with_prefix("APP"))?;
 
         if let Some(config_file_path) = config_file {
             settings.merge(config::File::with_name(config_file_path))?;

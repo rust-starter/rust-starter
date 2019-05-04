@@ -1,3 +1,4 @@
+#[cfg(not(debug_assertions))]
 #[macro_use]
 extern crate human_panic;
 #[macro_use]
@@ -22,7 +23,6 @@ use clap::AppSettings;
 use slog::Drain;
 use slog_syslog::Facility;
 
-use std::collections::HashMap;
 use utils::config::AppConfig;
 use utils::error::Result;
 
@@ -53,7 +53,7 @@ pub fn start() -> Result<()> {
     let cli_matches = cli_app.get_matches();
 
     // Setup default Settings
-    let mut settings = AppConfig::new(cli_matches.value_of("config"))?;
+    let settings = AppConfig::new(cli_matches.value_of("config"))?;
 
     // Matches Commands or display help
     commands::match_cmd(cli_matches)?;
