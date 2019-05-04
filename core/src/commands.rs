@@ -1,5 +1,6 @@
 use super::hazard;
 use super::utils::error::Result;
+use super::SETTINGS;
 
 pub fn match_cmd(cli_matches: clap::ArgMatches) -> Result<()> {
     match cli_matches.subcommand() {
@@ -34,7 +35,9 @@ pub fn cmd_hazard() -> Result<()> {
 
 /// Show the configuration file
 pub fn cmd_config() -> Result<()> {
-    println!("Configuration file");
+    let r = SETTINGS.read()?;
+
+    println!("{:?}", *r);
 
     Ok(())
 }

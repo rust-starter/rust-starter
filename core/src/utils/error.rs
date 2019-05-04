@@ -36,7 +36,7 @@ impl fmt::Display for Error {
 #[derive(Debug, Copy, Clone, PartialEq, Fail)]
 pub enum ErrorKind {
     ConfigError,
-    OnPurpose,
+    PoisonError,
 }
 
 impl fmt::Display for ErrorKind {
@@ -65,6 +65,14 @@ impl From<config::ConfigError> for Error {
     fn from(err: config::ConfigError) -> Self {
         Error {
             inner: err.context(ErrorKind::ConfigError),
+        }
+    }
+}
+
+impl<T> From<std::sync::PoisonError<T>> for Error {
+    fn from(err: std::sync::PoisonError<T>) -> Self {
+        Error {
+            inner: Context::from(ErrorKind::PoisonError),
         }
     }
 }

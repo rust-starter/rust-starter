@@ -7,6 +7,8 @@ extern crate clap;
 extern crate slog;
 #[macro_use]
 extern crate serde;
+#[macro_use]
+extern crate lazy_static;
 
 pub extern crate failure;
 
@@ -22,9 +24,14 @@ use clap::App;
 use clap::AppSettings;
 use slog::Drain;
 use slog_syslog::Facility;
+use std::sync::RwLock;
 
 use utils::config::AppConfig;
 use utils::error::Result;
+
+lazy_static! {
+    static ref SETTINGS: RwLock<AppConfig> = RwLock::new(AppConfig::new(None).unwrap());
+}
 
 pub fn start() -> Result<()> {
     #[cfg(not(debug_assertions))]
@@ -53,7 +60,10 @@ pub fn start() -> Result<()> {
     let cli_matches = cli_app.get_matches();
 
     // Setup default Settings
-    let settings = AppConfig::new(cli_matches.value_of("config"))?;
+    {
+        let mut w = SETTINGS.write().unwrap();
+        *w = AppConfig::new(cli_matches.value_of("config"))?;
+    }
 
     // Matches Commands or display help
     commands::match_cmd(cli_matches)?;
