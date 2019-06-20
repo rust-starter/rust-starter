@@ -70,7 +70,7 @@ impl From<config::ConfigError> for Error {
 }
 
 impl<T> From<std::sync::PoisonError<T>> for Error {
-    fn from(err: std::sync::PoisonError<T>) -> Self {
+    fn from(_err: std::sync::PoisonError<T>) -> Self {
         Error {
             inner: Context::from(ErrorKind::PoisonError),
         }

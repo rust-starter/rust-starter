@@ -29,7 +29,7 @@ fn test_hazard_exit_code() {
 #[test]
 fn test_hazard_stdout() {
     let hazard_predicate = predicate::function(|x: &str| {
-        if (x == "You got it right!\n" || x == "You got it wrong!\n") {
+        if x == "You got it right!\n" || x == "You got it wrong!\n" {
             return true;
         } else {
             return false;
