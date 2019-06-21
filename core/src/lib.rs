@@ -41,7 +41,7 @@ pub fn start() -> Result<()> {
     }
 
     // Setup Logging
-    let syslog = slog_syslog::unix_3164(Facility::LOG_USER).unwrap();
+    let syslog = slog_syslog::unix_3164(Facility::LOG_USER)?;
     let logger = slog::Logger::root(syslog.fuse(), o!("who" => "rust-starter"));
 
     info!(logger, "testing logging");
