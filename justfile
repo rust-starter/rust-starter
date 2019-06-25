@@ -19,10 +19,16 @@ clean:
 	find . -type f -name "*.bk" -exec rm {} \;
 	find . -type f -name ".*~" -exec rm {} \;
 
-build-docker:
-	docker run -v "$PWD":/build \
-	-v $PWD/.cache/.cargo/git:/root/.cargo/git \
-	-v $PWD/.cache/.cargo/registry:/root/.cargo/registry \
-	--entrypoint cargo \
-	fredrikfornwall/rust-static-builder \
-	run  --target x86_64-unknown-linux-musl
+docker-build:
+	docker build -t rust-starter -f docker/Dockerfile .
+
+docker-version:
+	docker run -t rust-starter rustc --version
+	docker run -t rust-starter cargo --version
+	docker run -t rust-starter rustup --version
+
+docker-run:
+	docker run -t rust-starter cargo build --all --all-targets 
+
+docker-test:	
+	docker run -t rust-starter cargo test --all
