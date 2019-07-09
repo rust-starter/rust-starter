@@ -20,7 +20,9 @@ clean:
 	find . -type f -name ".*~" -exec rm {} \;
 
 docker-build:
+	mv docker/.dockerignore .dockerignore
 	docker build -t rust-starter -f docker/Dockerfile .
+	mv .dockerignore docker/.dockerignore
 
 docker-version:
 	docker run -t rust-starter rustc --version
