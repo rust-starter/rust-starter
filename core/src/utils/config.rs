@@ -27,7 +27,6 @@ impl AppConfig {
             settings.merge(config::File::with_name(config_file_path))?;
         }
 
-        // TODO: Replace this unwrap with a ? implementation
-        Ok(settings.try_into().unwrap())
+        Ok(settings.try_into()?)
     }
 }
