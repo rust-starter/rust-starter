@@ -37,7 +37,7 @@ pub fn cmd_hazard() -> Result<()> {
 pub fn cmd_config() -> Result<()> {
     let r = SETTINGS.read()?;
 
-    println!("{:?}", *r);
+    println!("{:#?}", *r);
 
     Ok(())
 }
