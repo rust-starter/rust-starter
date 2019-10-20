@@ -3,3 +3,4 @@ Cargo.lock
 **/*.rs.bk
 .cache
 custom_config.toml
+.DS_Store
