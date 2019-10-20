@@ -13,8 +13,11 @@ extern crate lazy_static;
 pub extern crate failure;
 
 extern crate config;
-extern crate rand;
 extern crate slog_syslog;
+
+// This library is not required, and is used to generate
+// random numbers for one of the example commands
+extern crate rand;
 
 pub mod commands;
 pub mod hazard;
@@ -29,9 +32,9 @@ use utils::config::AppConfig;
 use utils::error::Result;
 
 pub fn start() -> Result<()> {
+    // Human Panic. Only enabled when *not* debugging.
     #[cfg(not(debug_assertions))]
     {
-        // Setup human-panic
         setup_panic!();
     }
 

@@ -4,6 +4,8 @@ use std::sync::RwLock;
 
 use super::error::Result;
 
+// CONFIG static variable. It's actually an AppConfig
+// inside an RwLock.
 lazy_static! {
     static ref CONFIG: RwLock<AppConfig<'static>> = RwLock::new(AppConfig {
         debug: true,
@@ -54,6 +56,7 @@ impl AppConfig<'_> {
         Ok(())
     }
 
+    // Set CONFIG
     pub fn set(app_config: AppConfig<'static>) -> Result<()> {
         // Save config to RwLoc
         {
@@ -64,8 +67,14 @@ impl AppConfig<'_> {
         Ok(())
     }
 
+    // Get CONFIG
+    // This clones CONFIG into a new AppConfig object.
+    // This means you have to fetch this again if you changed the configuration.
     pub fn get() -> Result<AppConfig<'static>> {
+        // Get a Read Lock from RwLock
         let r = CONFIG.read()?;
+
+        // Deref and Clone the object
         let config = r.deref().clone();
 
         Ok(config)

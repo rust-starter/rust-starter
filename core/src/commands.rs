@@ -22,6 +22,7 @@ pub fn match_cmd(cli_matches: clap::ArgMatches) -> Result<()> {
 
 /// Show the configuration file
 pub fn cmd_hazard() -> Result<()> {
+    // Generate, randomly, True or False
     let random_hazard: bool = hazard::generate_hazard()?;
 
     if random_hazard {
