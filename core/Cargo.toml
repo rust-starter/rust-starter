@@ -7,7 +7,7 @@ edition = "2018"
 
 [dependencies]
 human-panic = "1.0.1"
-dotenv = "0.14.1"
+dotenv = "0.15.0"
 failure = "0.1.5"
 dirs = "2.0.1"
 toml = "0.5.1"
