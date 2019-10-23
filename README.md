@@ -6,20 +6,54 @@ Rust Starter
 Rust Starter aims to provide high quality components to bootstrap your Rust CLI Project. It includes a battery of most used libraries; and defines a set of Rust best practices.
 
 * [Documentation]()
-* [Website]()
+* [Website -coming soon-]()
 * [Tutorial]()
 
 Table of Contents
 =================
 
+* [What's new](#whats-new)
 * [About](#about)
 * [FAQ](#faq)
 * [Features](#features)
-* [Quick Bootstrapping](#quick-example)
+* [Quick Bootstrapping](#quick-bootstrapping)
+* [Included Libraries](#included-libraries)
 * [How to Contribute](#how-to-contribute)
 * [License](#license)
 
-## Hwo to Contribute
+## What's New?
+
+## About
+
+`rust-starter` is an empty Rust CLI application with libraries, and few defaults. The goal is to help you bootstrap your next CLI project as quickly as possible while ensuring you make use of the best tools and best-practices that are available today.
+
+There is no configuration required (though we recommend you check all the possible configurations possible). A blank slate will compile, and has a few commands. You can start coding right away!
+
+## FAQ
+
+still in progress...
+
+## Features
+
+non-exhaustive, still under writing
+
+- Clap for Command Line Argument parsing.
+- Error Chaining with Failure.
+- Configuration management with config-rs.
+- Logging.
+- CI/CD and a Dockerfile to run your CLI inside a Docker container.
+- Code Coverage, Justfile, etc..
+- MIT License.
+
+## Quick Bootstrapping
+
+## Included Libraries
+
+`rust-starter` uses a bunch of open source libraries. These are actual dependencies.
+
+(maybe a dependency graph here?)
+
+## How to Contribute
 
 Details on how to contribute can be found in the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
 

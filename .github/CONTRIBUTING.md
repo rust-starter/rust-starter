@@ -1,8 +1,25 @@
 # How to Contribute
 
-This document is unstable and might change in the future. It is heavly influed by Clap.
+We welcome any kind of contributions. Whether you are reporting a bug, coding a feature or correcting a typo. Every effort counts; and all contributions are greatly appreaciated.
+
+Another great way to contribute is to actually use Rust Starter for your Open Source or Commercial projects. If you do, make sure to open an issue with a link to your project. In the future, there will be a list of applications bootstrapped with Rust Starter.
 
 ### Testing Code
+
+To run all tests, run the following command.
+
+```sh
+cargo test --all
+
+```
+
+Alternatively, if you have [`just`](https://github.com/casey/just) installed you can run the prebuilt recipes. *Not* using `just` is perfectly fine as well, it simply bundles commands automatically.
+
+For example, to test the code, as above simply run:
+
+```sh
+$ just run-tests
+```
 
 ### Linting Code
 
@@ -28,8 +45,22 @@ Use a [conventional](https://github.com/ajoslin/conventional-changelog/blob/a550
 
 ### Tests and Documentation
 
+1. Create tests for your changes
+2. **Ensure the tests are passing.** Run the tests (`cargo test --all`), alternatively `just run-tests` if you have `just` installed.
+3. **Optional** Run the lints.
+4. Ensure your changes contain documentation if adding new APIs or features.
+
 ### Preparing the PR
 
-### Other ways to contribute
+
+1. `git rebase` into concise commits and remove `--fixup`s or `wip` commits (`git rebase -i HEAD~NUM` where `NUM` is number of commits back to start the rebase)
+2. Push your changes back to your fork (`git push origin $your-branch`)
+3. Create a pull request against `master`! (You can also create the pull request first, and we'll merge when ready. This a good way to discuss proposed changes.)
 
 ### Goals
+
+* Remain backwards compatible when possible.
+    Backward compatibility is not critical since projects do not depend on Rust Starter. But it's a good idea to have stable features and usage.
+* Reduce dependencies.
+* Follow best practices.
+* Ease of use and customization.
