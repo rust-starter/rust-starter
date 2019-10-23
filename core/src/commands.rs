@@ -38,5 +38,6 @@ pub fn cmd_hazard() -> Result<()> {
 pub fn cmd_config() -> Result<()> {
     let config = AppConfig::get()?;
     println!("{:#?}", config);
+
     Ok(())
 }

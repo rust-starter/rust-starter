@@ -12,11 +12,11 @@ debug TEST:
 run-tests:
 	cargo test --all
 
-bench: 
-	cargo bench 
+bench:
+	cargo bench
 
 lint:
-	cargo clippy 
+	cargo clippy
 
 clean:
 	cargo clean

@@ -9,11 +9,13 @@ extern crate slog;
 extern crate serde;
 #[macro_use]
 extern crate lazy_static;
-
-pub extern crate failure;
-
 extern crate config;
+pub extern crate failure;
 extern crate slog_syslog;
+extern crate slog_term;
+#[macro_use]
+extern crate slog_scope;
+extern crate slog_async;
 
 // This library is not required, and is used to generate
 // random numbers for one of the example commands
@@ -25,11 +27,10 @@ pub mod utils;
 
 use clap::App;
 use clap::AppSettings;
-use slog::Drain;
-use slog_syslog::Facility;
 
 use utils::config::AppConfig;
 use utils::error::Result;
+use utils::log;
 
 pub fn start() -> Result<()> {
     // Human Panic. Only enabled when *not* debugging.
@@ -39,8 +40,7 @@ pub fn start() -> Result<()> {
     }
 
     // Setup Logging
-    //let syslog = slog_syslog::unix_3164(Facility::LOG_USER)?;
-    //let logger = slog::Logger::root(syslog.fuse(), o!("who" => "rust-starter"));
+    let _guard = slog_scope::set_global_logger(log::default_root_logger()?);
 
     // Load Yaml configuration for Clap
     let yml = load_yaml!("resources/cli_config.yml");
