@@ -38,6 +38,7 @@ pub enum ErrorKind {
     ConfigError,
     PoisonError,
     IoError,
+    ClapError,
 }
 
 impl fmt::Display for ErrorKind {
@@ -77,10 +78,19 @@ impl<T> From<std::sync::PoisonError<T>> for Error {
         }
     }
 }
+
 impl From<std::io::Error> for Error {
     fn from(err: std::io::Error) -> Self {
         Error {
             inner: err.context(ErrorKind::IoError),
+        }
+    }
+}
+
+impl From<clap::Error> for Error {
+    fn from(err: clap::Error) -> Self {
+        Error {
+            inner: err.context(ErrorKind::ClapError),
         }
     }
 }

@@ -52,7 +52,7 @@ pub fn start() -> Result<()> {
         .author(crate_authors!("\n"));
 
     // Get matches
-    let cli_matches = cli_app.get_matches();
+    let cli_matches = cli_app.get_matches_safe()?;
 
     // Merge clap config file if the value is set
     AppConfig::init(cli_matches.value_of("config"))?;
