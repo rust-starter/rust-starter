@@ -13,7 +13,6 @@ extern crate config;
 pub extern crate failure;
 extern crate slog_syslog;
 extern crate slog_term;
-#[macro_use]
 extern crate slog_scope;
 extern crate slog_async;
 
