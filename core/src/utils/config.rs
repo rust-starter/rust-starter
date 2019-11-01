@@ -12,13 +12,13 @@ lazy_static! {
 
 #[derive(Debug, Deserialize)]
 pub struct Database {
-    url: String,
+    pub url: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct AppConfig {
-    debug: bool,
-    database: Database,
+    pub debug: bool,
+    pub database: Database,
 }
 
 impl AppConfig {
