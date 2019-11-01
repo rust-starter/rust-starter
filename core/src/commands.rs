@@ -36,7 +36,7 @@ pub fn cmd_hazard() -> Result<()> {
 
 /// Show the configuration file
 pub fn cmd_config() -> Result<()> {
-    let config = AppConfig::get()?;
+    let config = AppConfig::fetch()?;
     println!("{:#?}", config);
 
     Ok(())
