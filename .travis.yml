@@ -1,4 +1,11 @@
+sudo: true
 language: rust
+cache:
+  directories:
+    - $HOME/.cargo
+    - $HOME/.rustup
+before_cache:
+  - rm -rf /home/travis/.cargo/registry
 rust:
   - stable
   - beta
@@ -6,4 +13,3 @@ rust:
 jobs:
   allow_failures:
     - rust: nightly
-  fast_finish: true
