@@ -1,5 +1,4 @@
-#[macro_use]
-extern crate lazy_static;
+extern crate clap;
 
 // This library is not required, and is used to generate
 // random numbers for one of the example commands
