@@ -15,5 +15,5 @@ fn main() -> Result<()> {
     // Setup Logging
     log::setup_logging()?;
 
-    core::start()
+    cli::cli_match()
 }

@@ -6,7 +6,6 @@ description = "The application core code"
 edition = "2018"
 
 [dependencies]
-cli = { path = "../cli" }
 utils = { path = "../utils" }
 
 rand = "0.7"

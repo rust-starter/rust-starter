@@ -2,7 +2,7 @@
 name = "utils"
 version = "0.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
-description = "Utilities finct"
+description = "Various utilities and functionalities"
 edition = "2018"
 
 [dependencies]
