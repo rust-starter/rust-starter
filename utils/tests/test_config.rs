@@ -1,6 +1,4 @@
-extern crate core;
-
-use core::utils::config::*;
+use utils::app_config::*;
 
 #[test]
 fn fetch_config() {

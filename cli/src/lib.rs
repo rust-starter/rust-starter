@@ -7,6 +7,7 @@ use utils::error::Result;
 
 pub fn cli_config<'a>() -> Result<clap::ArgMatches<'a>> {
     let cli_app = App::new("rust-starter")
+        .setting(AppSettings::ArgRequiredElseHelp)
         .version(crate_version!())
         .about(crate_description!())
         .author(crate_authors!("\n"))
@@ -22,7 +23,7 @@ pub fn cli_config<'a>() -> Result<clap::ArgMatches<'a>> {
         .subcommand(SubCommand::with_name("config").about("Show Configuration"));
 
     // Get matches
-    let cli_matches = cli_app.get_matches_safe()?;
+    let cli_matches = cli_app.get_matches();
 
     Ok(cli_matches)
 }
