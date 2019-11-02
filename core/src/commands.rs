@@ -1,5 +1,5 @@
 use super::hazard;
-use super::utils::config::AppConfig;
+use super::utils::app_config::AppConfig;
 use super::utils::error::Result;
 
 pub fn match_cmd(cli_matches: clap::ArgMatches) -> Result<()> {

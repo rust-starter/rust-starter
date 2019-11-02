@@ -12,9 +12,20 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 """
 
 [workspace]
+members = [
+    "utils",
+    "cli",
+    "core",
+]
 
 [dependencies]
+utils = { path = "utils" }
+cli = { path = "cli"}
 core = { path = "core" }
+
+[dev-dependencies]
+assert_cmd = "0.11"
+predicates = "1.0.1"
 
 [profile.dev]
 opt-level=0
