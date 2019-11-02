@@ -28,7 +28,7 @@ impl AppConfig {
         // Embed file into executable
         // This macro will embed the configuration file into the
         // executable. Check include_str! for more info.
-        let contents = include_str!("../resources/default_config.toml");
+        let contents = include_str!("../../core/resources/default_config.toml");
 
         // Merge settings with default file and env variables
         settings

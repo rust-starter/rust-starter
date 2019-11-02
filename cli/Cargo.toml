@@ -1,0 +1,17 @@
+[package]
+name = "cli"
+version = "0.0.1"
+authors = ["Abid Omar <contact@omarabid.com>"]
+description = "CLI interface"
+edition = "2018"
+
+[dependencies]
+utils = { path = "../utils" }
+
+[dependencies.clap]
+version = "2.33.0"
+features = ["yaml"]
+
+[dev-dependencies]
+assert_cmd = "0.11"
+predicates = "1.0.1"
