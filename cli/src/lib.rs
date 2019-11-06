@@ -13,7 +13,7 @@ pub fn cli_match() -> Result<()> {
     let cli_matches = cli_config()?;
 
     // Merge clap config file if the value is set
-    AppConfig::init(cli_matches.value_of("config"))?;
+    AppConfig::merge_config(cli_matches.value_of("config"))?;
 
     // Matches Commands or display help
     match cli_matches.subcommand() {

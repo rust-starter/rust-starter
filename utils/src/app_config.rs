@@ -22,23 +22,19 @@ pub struct AppConfig {
 }
 
 impl AppConfig {
-    pub fn init(config_file: Option<&str>) -> Result<()> {
+    pub fn init(default_config: Option<&str>) -> Result<()> {
         let mut settings = Config::new();
 
         // Embed file into executable
         // This macro will embed the configuration file into the
         // executable. Check include_str! for more info.
-        let contents = include_str!("../resources/default_config.toml");
-
-        // Merge settings with default file and env variables
-        settings
-            .merge(config::File::from_str(&contents, config::FileFormat::Toml))?
-            .merge(Environment::with_prefix("APP"))?;
-
-        // Merge settings with Clap config file if there is one
-        if let Some(config_file_path) = config_file {
-            settings.merge(config::File::with_name(config_file_path))?;
+        if let Some(config_contents) = default_config {
+            //let contents = include_str!(config_file_path);
+            settings.merge(config::File::from_str(&config_contents, config::FileFormat::Toml))?;
         }
+
+        // Merge settings with env variables
+        settings.merge(Environment::with_prefix("APP"))?;
 
         // TODO: Merge settings with Clap Settings Arguments
 
@@ -48,6 +44,18 @@ impl AppConfig {
             *w = settings;
         }
 
+        Ok(())
+    }
+
+    pub fn merge_config(config_file: Option<&str>) -> Result<()> {
+        // Merge settings with config file if there is one
+        if let Some(config_file_path) = config_file {
+            {
+                CONFIG
+                    .write()?
+                    .merge(config::File::with_name(config_file_path))?;
+            }
+        }
         Ok(())
     }
 
@@ -62,7 +70,10 @@ impl AppConfig {
     }
 
     // Get a single value
-    pub fn get<'de, T>(key: &'de str) -> Result<T> where T: serde::Deserialize<'de> {
+    pub fn get<'de, T>(key: &'de str) -> Result<T>
+    where
+        T: serde::Deserialize<'de>,
+    {
         Ok(CONFIG.read()?.get::<T>(key)?)
     }
 
