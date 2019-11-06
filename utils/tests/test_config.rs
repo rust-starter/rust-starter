@@ -3,7 +3,8 @@ use utils::app_config::*;
 #[test]
 fn fetch_config() {
     // Initialize configuration
-    AppConfig::init(None).unwrap();
+    let config_contents = include_str!("resources/test_config.toml");
+    AppConfig::init(Some(config_contents)).unwrap();
 
     // Fetch an instance of Config
     let config = AppConfig::fetch().unwrap();
@@ -16,7 +17,8 @@ fn fetch_config() {
 #[test]
 fn verify_get() {
     // Initialize configuration
-    AppConfig::init(None);
+    let config_contents = include_str!("resources/test_config.toml");
+    AppConfig::init(Some(config_contents));
 
     // Check value with get
     assert_eq!(AppConfig::get::<bool>("debug").unwrap(), false);
@@ -29,7 +31,8 @@ fn verify_get() {
 #[test]
 fn verify_set() {
     // Initialize configuration
-    AppConfig::init(None);
+    let config_contents = include_str!("resources/test_config.toml");
+    AppConfig::init(Some(config_contents));
 
     // Set a field
     AppConfig::set("database.url", "new url").unwrap();
