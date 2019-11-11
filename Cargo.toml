@@ -23,6 +23,7 @@ utils = { path = "utils" }
 cli = { path = "cli"}
 core = { path = "core" }
 human-panic = "1.0.1"
+better-panic = "0.2.0"
 
 [dev-dependencies]
 assert_cmd = "0.11"

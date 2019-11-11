@@ -2,6 +2,9 @@
 #[macro_use]
 extern crate human_panic;
 
+#[cfg(debug_assertions)]
+extern crate better_panic;
+
 use utils::app_config::AppConfig;
 use utils::error::Result;
 use utils::log;
@@ -11,6 +14,12 @@ fn main() -> Result<()> {
     #[cfg(not(debug_assertions))]
     {
         setup_panic!();
+    }
+
+    // Better Panic. Only enabled *when* debugging.
+    #[cfg(debug_assertions)]
+    {
+        better_panic::install();
     }
 
     // Setup Logging
