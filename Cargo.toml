@@ -14,12 +14,14 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 [workspace]
 members = [
     "utils",
+    "tui",
     "cli",
     "core",
 ]
 
 [dependencies]
 utils = { path = "utils" }
+tui = { path = "tui" }
 cli = { path = "cli"}
 core = { path = "core" }
 human-panic = "1.0.1"

@@ -7,6 +7,7 @@ edition = "2018"
 
 [dependencies]
 utils = { path = "../utils" }
+tui = { path = "../tui" }
 
 rand = "0.7"
 

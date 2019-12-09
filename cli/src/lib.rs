@@ -48,7 +48,7 @@ pub fn cli_config<'a>() -> Result<clap::ArgMatches<'a>> {
                 .help("Set a custom config file")
                 .takes_value(true),
         )
-        .subcommand(SubCommand::with_name("hazard").about("Generate a hazardous occurance"))
+        .subcommand(SubCommand::with_name("hazard").about("Say Hello"))
         .subcommand(SubCommand::with_name("config").about("Show Configuration"));
 
     // Get matches

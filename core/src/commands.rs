@@ -8,10 +8,11 @@ pub fn hazard() -> Result<()> {
     // Generate, randomly, True or False
     let random_hazard: bool = hazard::generate_hazard()?;
 
+
     if random_hazard {
-        println!("You got it right!");
+    tui::display_dialog("You got it right!")?;
     } else {
-        println!("You got it wrong!");
+    tui::display_dialog("You got it wrong!")?;
     }
 
     Ok(())
