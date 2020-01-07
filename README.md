@@ -1,5 +1,11 @@
-Rust Starter
-============
+<h1 align="center">rust-starter</h1>
+<div align="center">
+ <strong>
+   Simplify Rust CLI apps development
+ </strong>
+</div>
+<br/>
+
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/omarabid/rust-starter/blob/master/LICENSE) [![CircleCI](https://circleci.com/gh/omarabid/rust-starter.svg?style=svg)](https://circleci.com/gh/omarabid/rust-starter) [![Gitter](https://badges.gitter.im/rust-starter/community.svg)](https://gitter.im/rust-starter/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/omarabid/rust-starter.svg?branch=master)](https://travis-ci.org/clap-rs/clap)
 
