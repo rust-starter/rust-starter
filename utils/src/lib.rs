@@ -1,5 +1,3 @@
-extern crate failure;
-extern crate config;
 #[macro_use]
 extern crate serde;
 #[macro_use]
