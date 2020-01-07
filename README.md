@@ -57,7 +57,7 @@ non-exhaustive, still under writing
 
 `rust-starter` uses a bunch of open source libraries. These are actual dependencies.
 
-(maybe a dependency graph here?)
+![cargo-graph dependencies](cargo-graph.png)
 
 ## How to Contribute
 
