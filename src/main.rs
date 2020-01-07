@@ -1,6 +1,5 @@
 #[cfg(not(debug_assertions))]
-#[macro_use]
-extern crate human_panic;
+use human_panic::setup_panic;
 
 #[cfg(debug_assertions)]
 extern crate better_panic;

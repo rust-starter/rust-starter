@@ -1,6 +1,8 @@
 use config::{Config, Environment};
 use std::ops::Deref;
 use std::sync::RwLock;
+use lazy_static::lazy_static;
+use serde::Deserialize;
 
 use super::error::Result;
 

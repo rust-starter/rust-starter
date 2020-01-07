@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate clap;
-
 use clap::{App, AppSettings, Arg, SubCommand};
+use clap::{crate_version, crate_description, crate_authors};
 
 use core::commands;
 use utils::app_config::AppConfig;
