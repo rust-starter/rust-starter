@@ -1,7 +1,7 @@
 <h1 align="center">rust-starter</h1>
 <div align="center">
  <strong>
-   Simplify Rust CLI apps development
+    A simple framework to build Rust CLI Applications
  </strong>
 </div>
 <br/>
