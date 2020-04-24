@@ -28,7 +28,7 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 - [Quick Bootstrapping](#quick-bootstrapping)
 - [Included Libraries](#included-libraries)
 - [How to Contribute](#how-to-contribute)
-  - [](#)
+  - [Versioning](#versioning)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
