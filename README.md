@@ -21,17 +21,15 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [rust-starter](#rust-starter)
-- [Table of Contents](#table-of-contents)
-  - [What's New?](#whats-new)
-  - [About](#about)
-  - [FAQ](#faq)
-  - [Features](#features)
-  - [Quick Bootstrapping](#quick-bootstrapping)
-  - [Included Libraries](#included-libraries)
-  - [How to Contribute](#how-to-contribute)
-    - [](#)
-  - [License](#license)
+- [What's New?](#whats-new)
+- [About](#about)
+- [FAQ](#faq)
+- [Features](#features)
+- [Quick Bootstrapping](#quick-bootstrapping)
+- [Included Libraries](#included-libraries)
+- [How to Contribute](#how-to-contribute)
+  - [](#)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
