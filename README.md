@@ -69,7 +69,7 @@ non-exhaustive, still under writing
 
 Details on how to contribute can be found in the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
 
-###
+### Versioning
 
 Rust Starter stricltly adheres to the [SemVer](https://semver.org/) Semantic Versioning.
 
