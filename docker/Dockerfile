@@ -1,7 +1,13 @@
-FROM circleci/rust:1.35
+FROM rust:1.43
 
-COPY --chown=circleci:circleci . /home/circleci/project
+# Copy project source code
+WORKDIR /usr/src/rustapp
+COPY . .
 
-WORKDIR /home/circleci/project
+# Print versions information
+RUN rustc --version
+RUN cargo --version
+RUN rustup --version
 
-RUN cargo fetch
+# Build the project
+RUN cargo build

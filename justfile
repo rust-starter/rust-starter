@@ -30,18 +30,8 @@ clean:
 	find . -type f -name "*.bk" -exec rm {} \;
 	find . -type f -name ".*~" -exec rm {} \;	
 
-docker-build:
-	mv docker/.dockerignore .dockerignore
-	docker build -t {{package_name}}_{{package_version}} -f docker/Dockerfile .
-	mv .dockerignore docker/.dockerignore
-
-docker-version:
-	docker run -t {{package_name}}_{{package_version}} rustc --version
-	docker run -t {{package_name}}_{{package_version}} cargo --version
-	docker run -t {{package_name}}_{{package_version}} rustup --version
-
-docker-run:
-	docker run -t {{package_name}}_{{package_version}} cargo run 
-
-docker-test:	
-	docker run -t {{package_name}}_{{package_version}} cargo test --all
+docker:
+    mv docker/.dockerignore .dockerignore
+    docker build -t {{package_name}}_{{package_version}} -f docker/Dockerfile .
+    mv .dockerignore docker/.dockerignore
+    docker run -it --rm {{package_name}}_{{package_version}} cargo test --all
