@@ -17,17 +17,21 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 * [Website -coming soon-]()
 * [Tutorial]()
 
-Table of Contents
-=================
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
 
-* [What's new](#whats-new)
-* [About](#about)
-* [FAQ](#faq)
-* [Features](#features)
-* [Quick Bootstrapping](#quick-bootstrapping)
-* [Included Libraries](#included-libraries)
-* [How to Contribute](#how-to-contribute)
-* [License](#license)
+- [What's New?](#whats-new)
+- [About](#about)
+- [FAQ](#faq)
+- [Features](#features)
+- [Quick Bootstrapping](#quick-bootstrapping)
+- [Included Libraries](#included-libraries)
+- [How to Contribute](#how-to-contribute)
+  - [Versioning](#versioning)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## What's New?
 
@@ -65,7 +69,7 @@ non-exhaustive, still under writing
 
 Details on how to contribute can be found in the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
 
-###
+### Versioning
 
 Rust Starter stricltly adheres to the [SemVer](https://semver.org/) Semantic Versioning.
 
