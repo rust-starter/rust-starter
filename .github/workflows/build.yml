@@ -26,7 +26,7 @@ jobs:
       
     - name: Zip release
       id: zip-release
-      run: zip -j build.zip target/release/cargo-analysis
+      run: zip -j build.zip target/release/rust-starter
       
     - name: Artificat Production
       id: create-artifact
