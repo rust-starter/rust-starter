@@ -1,18 +1,70 @@
 name: Build
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Source
+      id: checkout-source
+      uses: actions/checkout@v2
+      
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+  
     - name: Build
-      run: cargo build --verbose
+      id: build-release
+      run: cargo build --release
+      
+    - name: Zip release
+      id: zip-release
+      run: zip -j build.zip target/release/cargo-analysis
+      
+    - name: Artificat Production
+      id: create-artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: build.zip
+    
+    - name: Delete latest release
+      id: delete-last-release
+      uses: omarabid-forks/action-delete-latest-release@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create Release
+      id: create-release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: live
+        release_name: Live Release
+        body: Latest build
+        draft: false
+        prerelease: false
+    
+    - name: Upload Artifact
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create-release.outputs.upload_url }} 
+        asset_path: build.zip
+        asset_name: build.zip
+        asset_content_type: application/zip
+
+    - uses: omarabid-forks/purge-artifacts@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        expire-in: 0
