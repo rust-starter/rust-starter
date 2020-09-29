@@ -1,4 +1,4 @@
-use clap::{App, AppSettings, Arg, SubCommand};
+use clap::{App, AppSettings, Arg};
 use clap::{crate_version, crate_description, crate_authors};
 
 use core::commands;
@@ -14,11 +14,11 @@ pub fn cli_match() -> Result<()> {
     AppConfig::merge_config(cli_matches.value_of("config"))?;
 
     // Matches Commands or display help
-    match cli_matches.subcommand() {
-        ("hazard", _) => {
+    match cli_matches.subcommand_name() {
+        Some("hazard") => {
             commands::hazard()?;
         }
-        ("config", _) => {
+        Some("config") => {
             commands::config()?;
         }
         _ => {
@@ -32,22 +32,22 @@ pub fn cli_match() -> Result<()> {
 
 /// Configure Clap
 /// This function will configure clap and match arguments
-pub fn cli_config<'a>() -> Result<clap::ArgMatches<'a>> {
+pub fn cli_config() -> Result<clap::ArgMatches> {
     let cli_app = App::new("rust-starter")
         .setting(AppSettings::ArgRequiredElseHelp)
         .version(crate_version!())
         .about(crate_description!())
         .author(crate_authors!("\n"))
         .arg(
-            Arg::with_name("config")
-                .short("c")
+            Arg::new("config")
+                .short('c')
                 .long("config")
                 .value_name("FILE")
-                .help("Set a custom config file")
+                .about("Set a custom config file")
                 .takes_value(true),
         )
-        .subcommand(SubCommand::with_name("hazard").about("Generate a hazardous occurance"))
-        .subcommand(SubCommand::with_name("config").about("Show Configuration"));
+        .subcommand(App::new("hazard").about("Generate a hazardous occurance"))
+        .subcommand(App::new("config").about("Show Configuration"));
 
     // Get matches
     let cli_matches = cli_app.get_matches();
