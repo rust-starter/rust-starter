@@ -1,3 +1,6 @@
+<p align="center">
+<a href="https://rust-starter.github.io"><img src="https://raw.githubusercontent.com/rust-starter/rust-starter.github.io/master/docs/images/logo_color.png" height="100px"/></a>
+ </p>
 <h1 align="center">rust-starter</h1>
 <div align="center">
  <strong>
@@ -11,11 +14,9 @@
 ![tests](https://github.com/omarabid/rust-starter/workflows/tests/badge.svg)
 ![build](https://github.com/omarabid/rust-starter/workflows/build/badge.svg)
 
-Rust Starter aims to provide high quality components to bootstrap your Rust CLI Project. It includes a battery of most used libraries; and defines a set of Rust best practices.
+[Documentation]() | [Website](https://rust-starter.github.io) | [Tutorial]()
 
-* [Documentation]()
-* [Website -coming soon-]()
-* [Tutorial]()
+`rust-starter` aims to provide high quality components to bootstrap your Rust CLI Project. It includes a battery of most used libraries; and defines a set of Rust best practices.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
