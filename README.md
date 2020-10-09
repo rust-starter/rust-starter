@@ -60,6 +60,8 @@ non-exhaustive, still under writing
 
 ## Quick Bootstrapping
 
+`rust-starter` should compile as is. A `cargo-generate` template is also available. For a more detailed introduction, check the [Getting Started](https://rust-starter.github.io/#getting-started) guide.
+
 ## Included Libraries
 
 `rust-starter` uses a bunch of open source libraries. These are actual dependencies.
