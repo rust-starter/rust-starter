@@ -44,7 +44,7 @@ There is no configuration required (though we recommend you check all the possib
 
 ## FAQ
 
-still in progress...
+For the Full FAQ, check the [website](https://rust-starter.github.io/#faq)
 
 ## Features
 
