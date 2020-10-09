@@ -1,5 +1,4 @@
 use slog::Drain;
-use slog_async;
 use slog_syslog::Facility;
 use slog::o;
 
