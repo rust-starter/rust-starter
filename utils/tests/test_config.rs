@@ -18,7 +18,7 @@ fn fetch_config() {
 fn verify_get() {
     // Initialize configuration
     let config_contents = include_str!("resources/test_config.toml");
-    AppConfig::init(Some(config_contents));
+    AppConfig::init(Some(config_contents)).unwrap();
 
     // Check value with get
     assert_eq!(AppConfig::get::<bool>("debug").unwrap(), false);
@@ -32,7 +32,7 @@ fn verify_get() {
 fn verify_set() {
     // Initialize configuration
     let config_contents = include_str!("resources/test_config.toml");
-    AppConfig::init(Some(config_contents));
+    AppConfig::init(Some(config_contents)).unwrap();
 
     // Set a field
     AppConfig::set("database.url", "new url").unwrap();
