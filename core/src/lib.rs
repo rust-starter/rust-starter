@@ -1,5 +1,6 @@
 pub mod commands;
 pub mod hazard;
+pub mod error;
 
 use utils::error::Result;
 

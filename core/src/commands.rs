@@ -1,4 +1,5 @@
 use super::hazard;
+use super::error;
 
 use utils::app_config::AppConfig;
 use utils::error::Result;
@@ -22,5 +23,14 @@ pub fn config() -> Result<()> {
     let config = AppConfig::fetch()?;
     println!("{:#?}", config);
 
+    Ok(())
+}
+
+/// Simulate an error
+pub fn simulate_error() -> Result<()> {
+    // Simulate an error
+    error::simulate_error()?;
+
+    // We should never get here...
     Ok(())
 }
