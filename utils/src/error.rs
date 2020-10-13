@@ -16,10 +16,12 @@ pub enum GlobalError {
     IoError(#[from] std::io::Error),
     #[error("Clap Error")]
     ClapError(#[from] clap::Error),
+    #[error("Undefined Error")]
+    Undefined,
 }
 
 impl<T> From<std::sync::PoisonError<T>> for GlobalError {
-fn from(_err: std::sync::PoisonError<T>) -> Self {
-GlobalError::PoisonError
-}
+    fn from(_err: std::sync::PoisonError<T>) -> Self {
+        GlobalError::PoisonError
+    }
 }
