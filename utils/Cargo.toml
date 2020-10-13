@@ -6,7 +6,7 @@ description = "Various utilities and functionalities"
 edition = "2018"
 
 [dependencies]
-failure = "0.1.5"
+thiserror = "1.0"
 config = "0.10.1"
 lazy_static = "1.4"
 slog = "2.5.2"
