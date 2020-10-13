@@ -1,4 +1,5 @@
 use std::result;
+use std::backtrace::Backtrace;
 use thiserror::Error;
 
 
@@ -13,7 +14,11 @@ pub enum GlobalError {
     #[error("Poison Error")]
     PoisonError,
     #[error("IO Error")]
-    IoError(#[from] std::io::Error),
+    IoError {
+        #[from]
+        source: std::io::Error,
+        backtrace: Backtrace,
+    },
     #[error("Clap Error")]
     ClapError(#[from] clap::Error),
     #[error("Undefined Error")]
