@@ -18,6 +18,9 @@ pub fn cli_match() -> Result<()> {
         Some("hazard") => {
             commands::hazard()?;
         }
+        Some("error") => {
+            commands::simulate_error()?;
+        }
         Some("config") => {
             commands::config()?;
         }
@@ -47,6 +50,8 @@ pub fn cli_config() -> Result<clap::ArgMatches> {
                 .takes_value(true),
         )
         .subcommand(App::new("hazard").about("Generate a hazardous occurance"))
+
+        .subcommand(App::new("error").about("Simulate an error"))
         .subcommand(App::new("config").about("Show Configuration"));
 
     // Get matches
