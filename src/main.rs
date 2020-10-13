@@ -18,7 +18,11 @@ fn main() -> Result<()> {
     // Better Panic. Only enabled *when* debugging.
     #[cfg(debug_assertions)]
     {
-        better_panic::install();
+        better_panic::Settings::debug()
+            .most_recent_first(false)
+            .lineno_suffix(true)
+            .verbosity(better_panic::Verbosity::Full)
+            .install();
     }
 
     // Setup Logging
