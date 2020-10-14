@@ -10,7 +10,11 @@ pub type Result<T> = result::Result<T, GlobalError>;
 #[derive(Error, Debug)]
 pub enum GlobalError {
     #[error("Configuration Error")]
-    ConfigError(#[from] config::ConfigError),
+    ConfigError {
+        #[from]
+        source: config::ConfigError,
+        backtrace: Backtrace,
+    },
     #[error("Poison Error")]
     PoisonError,
     #[error("IO Error")]
@@ -20,9 +24,14 @@ pub enum GlobalError {
         backtrace: Backtrace,
     },
     #[error("Clap Error")]
-    ClapError(#[from] clap::Error),
+    ClapError {
+        source: clap::Error,
+        backtrace: Backtrace,
+    },
     #[error("Undefined Error")]
-    Undefined,
+    Undefined {
+        backtrace: Backtrace,
+    },
 }
 
 impl<T> From<std::sync::PoisonError<T>> for GlobalError {
