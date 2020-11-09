@@ -15,8 +15,8 @@ pub fn setup_logging() -> Result<()> {
 
 pub fn default_root_logger() -> Result<slog::Logger> {
     // Create drains
-    let syslog_drain = default_syslog_drain()?;
-    let term_drain = default_term_drain()?;
+    let syslog_drain = default_syslog_drain().unwrap_or(default_discard()?);
+    let term_drain = default_term_drain().unwrap_or(default_discard()?);
 
     // Merge drains
     let drain = slog::Duplicate(syslog_drain, term_drain).fuse();
@@ -26,6 +26,12 @@ pub fn default_root_logger() -> Result<slog::Logger> {
 
     // Return Logger
     Ok(logger)
+}
+
+fn default_discard() -> Result<slog_async::Async> {
+    let drain = slog_async::Async::default(slog::Discard);
+
+    Ok(drain)
 }
 
 // term drain: Log to Terminal
