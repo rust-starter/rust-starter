@@ -34,4 +34,3 @@ docker:
     mv docker/.dockerignore .dockerignore
     docker build -t {{package_name}}_{{package_version}} -f docker/Dockerfile .
     mv .dockerignore docker/.dockerignore
-    docker run -it --rm {{package_name}}_{{package_version}} cargo test --all
