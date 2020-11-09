@@ -6,7 +6,6 @@ extern crate better_panic;
 
 use utils::app_config::AppConfig;
 use utils::error::Result;
-use utils::log;
 
 fn main() -> Result<()> {
     // Human Panic. Only enabled when *not* debugging.
@@ -26,7 +25,7 @@ fn main() -> Result<()> {
     }
 
     // Setup Logging
-    log::setup_logging()?;
+    utils::logger::setup_logging()?;
 
     // Initialize Configuration
     let config_contents = include_str!("resources/default_config.toml");

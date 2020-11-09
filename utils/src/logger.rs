@@ -7,6 +7,7 @@ use super::error::Result;
 pub fn setup_logging() -> Result<()> {
     // Setup Logging
     let _guard = slog_scope::set_global_logger(default_root_logger()?);
+
     Ok(())
 }
 
