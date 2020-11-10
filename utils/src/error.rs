@@ -39,6 +39,7 @@ pub enum ErrorKind {
     PoisonError,
     IoError,
     ClapError,
+    LoggerError,
 }
 
 impl fmt::Display for ErrorKind {
@@ -89,6 +90,14 @@ impl From<clap::Error> for Error {
     fn from(err: clap::Error) -> Self {
         Error {
             inner: err.context(ErrorKind::ClapError),
+        }
+    }
+}
+
+impl From<log::SetLoggerError> for Error {
+    fn from(err: log::SetLoggerError) -> Self {
+        Error {
+            inner: err.context(ErrorKind::LoggerError),
         }
     }
 }
