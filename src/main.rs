@@ -28,7 +28,10 @@ fn main() -> Result<()> {
     }
 
     // Setup Logging
-    utils::logger::setup_logging()?;
+    //utils::logger::setup_logging()?;
+
+    let _guard = slog_scope::set_global_logger(utils::logger::default_root_logger()?);
+    let _log_guard = slog_stdlog::init().unwrap(); // TODO: convert error
 
     // Initialize Configuration
     let config_contents = include_str!("resources/default_config.toml");
