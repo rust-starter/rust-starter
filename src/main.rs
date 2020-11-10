@@ -28,10 +28,16 @@ fn main() -> Result<()> {
     }
 
     // Setup Logging
+    //
+    // TODO: This code should probably be included in utils::logger::setup_logging
+    // The problem is that global variable is not set correct if this code is
+    // executed from a sub-crate. I'm not sure if it is possible to "import"
+    // this global variable to the root of the project and initialize it in
+    // the utils crate.
+    //
     //utils::logger::setup_logging()?;
-
     let _guard = slog_scope::set_global_logger(utils::logger::default_root_logger()?);
-    let _log_guard = slog_stdlog::init().unwrap(); // TODO: convert error
+    let _log_guard = slog_stdlog::init()?;
 
     // Initialize Configuration
     let config_contents = include_str!("resources/default_config.toml");
