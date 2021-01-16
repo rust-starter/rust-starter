@@ -22,7 +22,7 @@ jobs:
           args: '-- --test-threads 1'
 
       - name: Upload to codecov.io
-        uses: omarabid-forks/codecov@v1.0.2
+        uses: omarabid-forks/codecov@v1.2.1
         with:
           token: ${{secrets.CODECOV_TOKEN}}
 
