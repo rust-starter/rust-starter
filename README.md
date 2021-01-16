@@ -80,3 +80,4 @@ Rust Starter stricltly adheres to the [SemVer](https://semver.org/) Semantic Ver
 ## License
 
 `rust-starter` is licensed under the MIT license. Please read the [LICENSE](LICENSE) file in this repository for more information.
+
