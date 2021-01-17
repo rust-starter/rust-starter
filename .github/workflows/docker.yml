@@ -16,5 +16,5 @@ jobs:
     - run: mv docker/.dockerignore .dockerignore
     - name: Build the Docker image
       run: docker build --tag rust-starter:0.0.1 --file docker/Dockerfile .
-    - run: docker images
+    - run: docker tag rust-starter:0.0.1 ruststarter/rust-starter:0.0.1
     - run: docker push ruststarter/rust-starter:0.0.1
