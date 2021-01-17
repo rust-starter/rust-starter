@@ -10,10 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: export package_name=$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)
+    - run: echo $package_name
     - run: export package_version=$(sed -En 's/version[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)
     - run: export dockerhub_org=ruststarter
     - run: mv docker/.dockerignore .dockerignore
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $package_name:$package_version
+      run: docker build --tag $package_name:$package_version --file docker/Dockerfile .
     - run: docker images
     - run: docker push $dockerhub_org/$package_name:$package_version
