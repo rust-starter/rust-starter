@@ -23,13 +23,13 @@ jobs:
     - name: Build the Docker image
       run: docker build --tag ${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}} --file docker/Dockerfile .
     - run: docker tag ${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}} ruststarter/${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}}
-    - env:
-        DOCKER_USERNAME: ${secrets.DOCKER_USERNAME}
-        DOCKER_TOKEN: ${secrets.DOCKER_TOKEN}
-      run: echo $DOCKER_USERNAME - $DOCKER_TOKEN    
+    - run: echo $DOCKER_USERNAME - $DOCKER_TOKEN
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
     - name: Docker authentication
       env:
-        DOCKER_USERNAME: ${secrets.DOCKER_USERNAME}
-        DOCKER_TOKEN: ${secrets.DOCKER_TOKEN}
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
       run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_TOKEN"
     - run: docker push ruststarter/${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}}
