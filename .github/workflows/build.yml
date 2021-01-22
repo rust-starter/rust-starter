@@ -11,7 +11,14 @@ jobs:
     - name: Checkout Source
       id: checkout-source
       uses: actions/checkout@v2
-      
+    - name: Set variables
+      id: vars
+      run: |
+           echo "::set-output name=package_name::$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"      
+           echo "::set-output name=package_version::$(sed -En 's/version[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"
+    - run: |
+           echo "${{steps.vars.outputs.package_name}}"
+           echo "${{steps.vars.outputs.package_version}}"
     - uses: actions/cache@v2
       with:
         path: |
@@ -35,21 +42,15 @@ jobs:
         name: build
         path: build.zip
     
-    - name: Delete latest release
-      id: delete-last-release
-      uses: omarabid-forks/action-delete-latest-release@v2
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    
     - name: Create Release
       id: create-release
       uses: actions/create-release@latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: live
-        release_name: Live Release
-        body: Latest build
+        tag_name: ${{steps.vars.outputs.package_versino}}
+        release_name: Version ${{steps.vars.outputs.package_version}}
+        body: ${{steps.vars.outputs.package_name}} - ${{steps.vars.outputs.package_version}}
         draft: false
         prerelease: false
     
