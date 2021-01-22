@@ -11,11 +11,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set variables
       id: vars
-      run: echo "::set-output name=package_name::$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"      
-    - run: echo "${{steps.vars.outputs.package_name}}"
-    - run: export package_name=$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)
-    - run: export package_version=$(sed -En 's/version[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)
-    - run: export dockerhub_org=ruststarter
+      run: |
+           echo "::set-output name=package_name::$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"      
+           echo "::set-output name=package_version::$(sed -En 's/version[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"
+           echo "::set-output name=dockerhub_org::ruststarter"
+    - run: |
+           echo "${{steps.vars.outputs.package_name}}"
+           echo "${{steps.vars.outputs.package_version}}"
+           echo "${{steps.vars.outputs.dockerhub_org}}"
     - run: mv docker/.dockerignore .dockerignore
     - name: Build the Docker image
       run: docker build --tag rust-starter:0.0.1 --file docker/Dockerfile .
