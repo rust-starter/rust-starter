@@ -48,7 +48,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: ${{steps.vars.outputs.package_versino}}
+        tag_name: ${{steps.vars.outputs.package_version}}
         release_name: Version ${{steps.vars.outputs.package_version}}
         body: ${{steps.vars.outputs.package_name}} - ${{steps.vars.outputs.package_version}}
         draft: false
