@@ -41,7 +41,14 @@ jobs:
       with:
         name: build
         path: build.zip
-    
+
+    - name: Rollback Release
+      uses: author/action-rollback@stable
+      with:
+        tag: ${{ steps.vars.outputs.package_version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
     - name: Create Release
       id: create-release
       uses: actions/create-release@latest
