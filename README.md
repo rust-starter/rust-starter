@@ -28,7 +28,6 @@
 - [FAQ](#faq)
 - [Features](#features)
 - [Quick Bootstrapping](#quick-bootstrapping)
-- [Included Libraries](#included-libraries)
 - [How to Contribute](#how-to-contribute)
   - [Versioning](#versioning)
 - [License](#license)
