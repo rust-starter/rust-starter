@@ -42,8 +42,9 @@ jobs:
         name: build
         path: build.zip
 
-    - name: Rollback Release
+    - name: Remove Same Release
       uses: author/action-rollback@stable
+      continue-on-error: true
       with:
         tag: ${{ steps.vars.outputs.package_version }}
       env:
