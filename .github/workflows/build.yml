@@ -43,7 +43,7 @@ jobs:
         path: build.zip
 
     - name: Remove Same Release
-      uses: author/action-rollback@stable
+      uses: omarabid-forks/action-rollback@stable
       continue-on-error: true
       with:
         tag: ${{ steps.vars.outputs.package_version }}
