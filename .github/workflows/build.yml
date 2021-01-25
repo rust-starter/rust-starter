@@ -35,7 +35,7 @@ jobs:
       id: zip-release
       run: zip -j build.zip target/release/rust-starter
       
-    - name: Artificat Production
+    - name: Artifact Production
       id: create-artifact
       uses: actions/upload-artifact@v1
       with:
