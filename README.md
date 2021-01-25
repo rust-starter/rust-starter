@@ -15,9 +15,9 @@
 ![build](https://github.com/omarabid/rust-starter/workflows/build/badge.svg)
 [![codecov](https://codecov.io/gh/rust-starter/rust-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/rust-starter/rust-starter)
 
-[Documentation]() | [Website](https://rust-starter.github.io) | [Tutorial]()
+[Website](https://rust-starter.github.io)
 
-`rust-starter` aims to provide high quality components to bootstrap your Rust CLI Project. It includes a battery of most used libraries; and defines a set of Rust best practices.
+`rust-starter` is a starter boilerplate to create a Rust CLI application. It comes with a battery of components like argument parsing and configuration. It also has different tooling to create your binary, or automate your build process.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -37,11 +37,13 @@
 
 ## What's New?
 
+- Version 1.0.0 is released.
+
 ## About
 
 `rust-starter` is an empty Rust CLI application with libraries, and few defaults. The goal is to help you bootstrap your next CLI project as quickly as possible while ensuring you make use of the best tools and best-practices that are available today.
 
-There is no configuration required (though we recommend you check all the possible configurations possible). A blank slate will compile, and has a few commands. You can start coding right away!
+There is no configuration required (though we recommend you check all the possible configurations possible). An empty clone will compile, and has a few sample commands. You can start coding right away!
 
 ## FAQ
 
@@ -49,25 +51,18 @@ For the Full FAQ, check the [website](https://rust-starter.github.io/#faq)
 
 ## Features
 
-non-exhaustive, still under writing
-
-- Clap for Command Line Argument parsing.
-- Error Chaining with Failure.
-- Configuration management with config-rs.
-- Logging.
-- CI/CD and a Dockerfile to run your CLI inside a Docker container.
+- [Clap](https://github.com/clap-rs/clap) for Command Line Argument parsing.
+- Error Chaining with [Failure](https://github.com/rust-lang-nursery/failure).
+- Configuration management with [config-rs](https://github.com/mehcode/config-rs).
+- Multi-Drain, async Logging with [slog](https://github.com/slog-rs/slog).
+- Static binaries with [rust-musl-builder](https://github.com/emk/rust-musl-builder).
+- CI/CD through Github actions.
 - Code Coverage, Justfile, etc..
 - MIT License.
 
 ## Quick Bootstrapping
 
-`rust-starter` should compile as is. A `cargo-generate` template is also [available](https://github.com/rust-starter/rust-starter-generate). For a more detailed introduction, check the [Getting Started](https://rust-starter.github.io/#getting-started) guide.
-
-## Included Libraries
-
-`rust-starter` uses a bunch of open source libraries. These are actual dependencies.
-
-![cargo-graph dependencies](cargo-graph.png)
+`rust-starter` should compile and run as is. You just need to clone the repository. A `cargo-generate` template is also [available](https://github.com/rust-starter/rust-starter-generate). For a more detailed introduction, check the [Getting Started](https://rust-starter.github.io/#getting-started) guide.
 
 ## How to Contribute
 
