@@ -15,7 +15,7 @@ fn test_cli() {
 
 #[test]
 fn test_version() {
-    let expected_version = "rust-starter 0.0.1\n";
+    let expected_version = "rust-starter 1.0.0\n";
     let mut cmd = Command::cargo_bin("rust-starter").expect("Calling binary failed");
     cmd.arg("--version").assert().stdout(expected_version);
 }

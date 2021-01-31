@@ -22,9 +22,10 @@ fn verify_get() {
 
     // Check value with get
     assert_eq!(AppConfig::get::<bool>("debug").unwrap(), false);
+    println!("database.url = {}", AppConfig::get::<String>("database.url").unwrap());
     assert_eq!(
         AppConfig::get::<String>("database.url").unwrap(),
-        "custom database url"
+        "new url"
     );
 }
 
