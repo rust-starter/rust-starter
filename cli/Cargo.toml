@@ -1,6 +1,6 @@
 [package]
 name = "cli"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
 description = "CLI interface"
 edition = "2018"

@@ -1,6 +1,6 @@
 [package]
 name = "rust-starter"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
 edition = "2018"
 repository = "https://github.com/omarabid/rust-starter"
