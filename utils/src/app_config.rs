@@ -20,6 +20,7 @@ pub struct Database {
 #[derive(Debug, Deserialize)]
 pub struct AppConfig {
     pub debug: bool,
+    pub sentry_dsn: String,
     pub database: Database,
 }
 
