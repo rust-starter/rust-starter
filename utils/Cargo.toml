@@ -16,6 +16,9 @@ slog-scope = "4.3.0"
 slog-async = "2.5.0"
 slog-stdlog = "4.1.0"
 slog-journald = "2.1.1"
+sentry = { version = "0.19", features=["with_curl_transport", "failure"] }
+sentry-failure = "0.19"
+sentry-slog = "0.19"
 log = "0.4.11"
 serde = { version = "1.0", features = ["derive"]}
 

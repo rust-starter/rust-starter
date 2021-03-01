@@ -24,7 +24,11 @@ fn verify_get() {
     assert_eq!(AppConfig::get::<bool>("debug").unwrap(), false);
     assert_eq!(
         AppConfig::get::<String>("database.url").unwrap(),
-        "new url"
+        "custom database url"
+    );
+    assert_eq!(
+        AppConfig::get::<String>("sentry_dsn").unwrap(),
+        "sentry"
     );
 }
 

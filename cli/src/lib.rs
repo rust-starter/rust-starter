@@ -30,6 +30,7 @@ pub fn cli_match() -> Result<()> {
             // should probably be logged in case it executed.
         }
     }
+
     Ok(())
 }
 

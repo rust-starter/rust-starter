@@ -9,7 +9,6 @@ pub fn setup_logging() -> Result<()> {
     // Setup Logging
     let _guard = slog_scope::set_global_logger(default_root_logger()?).cancel_reset();
     let _log_guard = slog_stdlog::init().unwrap();
-    info!("Successfully setup logging");
 
     Ok(())
 }
@@ -19,13 +18,17 @@ pub fn default_root_logger() -> Result<slog::Logger> {
     let syslog_drain = default_syslog_drain().unwrap_or(default_discard()?);
     let term_drain = default_term_drain().unwrap_or(default_discard()?);
     let journald_drain = default_journald_drain().unwrap_or(default_discard()?);
+    let sentry_drain = default_sentry_drain().unwrap_or(default_discard()?);
 
     // Merge drains
     let drain = slog::Duplicate(syslog_drain, term_drain).fuse();
     let drain = slog::Duplicate(journald_drain, drain).fuse();
+    let drain = slog::Duplicate(sentry_drain, drain).fuse();
 
     // Create Logger
     let logger = slog::Logger::root(drain, o!("who" => "rust-starter"));
+
+    error!("aahah");
 
     // Return Logger
     Ok(logger)
@@ -61,4 +64,10 @@ fn default_journald_drain() -> Result<slog_async::Async> {
     let drain = slog_async::Async::default(journald);
 
     Ok(drain)
+}
+
+fn default_sentry_drain() -> Result<slog_async::Async> {
+    let drain = sentry_slog::SentryDrain::new(slog::Discard).fuse();
+
+    Ok(slog_async::Async::default(drain))
 }

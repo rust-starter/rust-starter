@@ -27,6 +27,11 @@ fn main() -> Result<()> {
             .install();
     }
 
+    let opts = sentry::ClientOptions {
+        ..Default::default()
+    };
+    let _guard = sentry::init(("temp", opts));
+
     // Setup Logging 
     utils::logger::setup_logging()?;
 
