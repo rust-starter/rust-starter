@@ -17,7 +17,4 @@ slog-async = "2.5.0"
 slog-stdlog = "4.1.0"
 log = "0.4.11"
 serde = { version = "1.0", features = ["derive"]}
-
-[dependencies.clap]
-version = "3.0.0-beta.2"
-features = ["yaml"]
+clap = "3.0.0"
