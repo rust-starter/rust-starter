@@ -30,7 +30,7 @@ fn main() -> Result<()> {
     let opts = sentry::ClientOptions {
         ..Default::default()
     };
-    let _guard = sentry::init(("temp", opts));
+    let _guard = sentry::init(("https://b5bfb09c14824f49b50f691b2ab74697@o527993.ingest.sentry.io/5650907", opts));
 
     // Setup Logging 
     utils::logger::setup_logging()?;

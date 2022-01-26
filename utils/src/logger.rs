@@ -10,6 +10,7 @@ pub fn setup_logging() -> Result<()> {
     let _guard = slog_scope::set_global_logger(default_root_logger()?).cancel_reset();
     let _log_guard = slog_stdlog::init().unwrap();
 
+    error!("aahah");
     Ok(())
 }
 
@@ -27,8 +28,6 @@ pub fn default_root_logger() -> Result<slog::Logger> {
 
     // Create Logger
     let logger = slog::Logger::root(drain, o!("who" => "rust-starter"));
-
-    error!("aahah");
 
     // Return Logger
     Ok(logger)
