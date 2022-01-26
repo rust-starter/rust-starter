@@ -1,8 +1,8 @@
 use config::{Config, Environment};
-use std::ops::Deref;
-use std::sync::RwLock;
 use lazy_static::lazy_static;
 use serde::Deserialize;
+use std::ops::Deref;
+use std::sync::RwLock;
 
 use super::error::Result;
 
@@ -24,6 +24,7 @@ pub struct AppConfig {
 }
 
 impl AppConfig {
+    /// Initialize AppConfig.
     pub fn init(default_config: Option<&str>) -> Result<()> {
         let mut settings = Config::new();
 
@@ -32,7 +33,10 @@ impl AppConfig {
         // executable. Check include_str! for more info.
         if let Some(config_contents) = default_config {
             //let contents = include_str!(config_file_path);
-            settings.merge(config::File::from_str(&config_contents, config::FileFormat::Toml))?;
+            settings.merge(config::File::from_str(
+                config_contents,
+                config::FileFormat::Toml,
+            ))?;
         }
 
         // Merge settings with env variables

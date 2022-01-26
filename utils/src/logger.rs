@@ -1,7 +1,7 @@
-use slog::Drain;
-use slog_syslog::Facility;
-use slog_journald::JournaldDrain;
 use slog::o;
+use slog::Drain;
+use slog_journald::JournaldDrain;
+use slog_syslog::Facility;
 
 use super::error::Result;
 

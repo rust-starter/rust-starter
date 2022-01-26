@@ -28,13 +28,8 @@ fn test_hazard_exit_code() {
 
 #[test]
 fn test_hazard_stdout() {
-    let hazard_predicate = predicate::function(|x: &str| {
-        if x == "You got it right!\n" || x == "You got it wrong!\n" {
-            return true;
-        } else {
-            return false;
-        }
-    });
+    let hazard_predicate =
+        predicate::function(|x: &str| x == "You got it right!\n" || x == "You got it wrong!\n");
     let mut cmd = Command::cargo_bin("rust-starter").expect("Calling binary failed");
     cmd.arg("hazard").assert().stdout(hazard_predicate);
 }

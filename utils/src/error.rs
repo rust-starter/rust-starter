@@ -44,7 +44,7 @@ pub enum ErrorKind {
 
 impl fmt::Display for ErrorKind {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-            write!(f, "Undefined Error")
+        write!(f, "Undefined Error")
     }
 }
 

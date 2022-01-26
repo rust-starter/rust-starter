@@ -1,5 +1,5 @@
-use super::hazard;
 use super::error;
+use super::hazard;
 
 use utils::app_config::AppConfig;
 use utils::error::Result;
@@ -28,7 +28,6 @@ pub fn config() -> Result<()> {
 
 /// Simulate an error
 pub fn simulate_error() -> Result<()> {
-
     // Log this Error simulation
     info!("We are simulating an error");
 

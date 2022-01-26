@@ -1,5 +1,5 @@
+use clap::{crate_authors, crate_description, crate_version};
 use clap::{App, AppSettings, Arg};
-use clap::{crate_version, crate_description, crate_authors};
 
 use core::commands;
 use utils::app_config::AppConfig;
