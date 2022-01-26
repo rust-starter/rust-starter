@@ -10,7 +10,3 @@ utils = { path = "../utils" }
 
 rand = "0.7.3"
 log = "0.4.11"
-
-[dependencies.clap]
-version = "3.0.0-beta.2"
-features = ["yaml"]
