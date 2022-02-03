@@ -1,42 +1,40 @@
-use std::fmt;
 use std::result;
+use std::backtrace::Backtrace;
+use thiserror::Error;
 
-use failure::{Backtrace, Context, Fail};
 
 /// A type alias that forces the usage of the custom error type.
-pub type Result<T> = result::Result<T, Error>;
+pub type Result<T> = result::Result<T, GlobalError>;
 
 /// Custom error type for handling errors.
-#[derive(Debug)]
-pub struct Error {
-    inner: Context<ErrorKind>,
-}
-
-impl Error {
-    pub fn kind(&self) -> ErrorKind {
-        *self.inner.get_context()
-    }
-}
-
-impl Fail for Error {
-    fn cause(&self) -> Option<&dyn Fail> {
-        self.inner.cause()
-    }
-    fn backtrace(&self) -> Option<&Backtrace> {
-        self.inner.backtrace()
-    }
-}
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.kind())
-    }
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Fail)]
-pub enum ErrorKind {
-    ConfigError,
+#[derive(Error, Debug)]
+pub enum GlobalError {
+    #[error("Configuration Error")]
+    ConfigError {
+        #[from]
+        source: config::ConfigError,
+        backtrace: Backtrace,
+    },
+    #[error("Poison Error")]
     PoisonError,
+    #[error("IO Error")]
+    IoError {
+        #[from]
+        source: std::io::Error,
+        backtrace: Backtrace,
+    },
+    #[error("Clap Error")]
+    ClapError {
+        source: clap::Error,
+        backtrace: Backtrace,
+    },
+    #[error("Undefined Error")]
+    Undefined {
+        backtrace: Backtrace,
+    },
+}
+
+impl<T> From<std::sync::PoisonError<T>> for GlobalError {
     IoError,
     ClapError,
     LoggerError,
@@ -72,25 +70,7 @@ impl From<config::ConfigError> for Error {
 
 impl<T> From<std::sync::PoisonError<T>> for Error {
     fn from(_err: std::sync::PoisonError<T>) -> Self {
-        Error {
-            inner: Context::from(ErrorKind::PoisonError),
-        }
-    }
-}
-
-impl From<std::io::Error> for Error {
-    fn from(err: std::io::Error) -> Self {
-        Error {
-            inner: err.context(ErrorKind::IoError),
-        }
-    }
-}
-
-impl From<clap::Error> for Error {
-    fn from(err: clap::Error) -> Self {
-        Error {
-            inner: err.context(ErrorKind::ClapError),
-        }
+        GlobalError::PoisonError
     }
 }
 
