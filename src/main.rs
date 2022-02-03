@@ -4,12 +4,12 @@ use human_panic::setup_panic;
 #[cfg(debug_assertions)]
 extern crate better_panic;
 
-#[macro_use]
 extern crate log;
 
 use utils::app_config::AppConfig;
 use utils::error::Result;
 
+/// The main entry point of the application.
 fn main() -> Result<()> {
     // Human Panic. Only enabled when *not* debugging.
     #[cfg(not(debug_assertions))]

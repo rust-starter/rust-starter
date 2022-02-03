@@ -1,6 +1,7 @@
-use slog::Drain;
-use slog_syslog::Facility;
 use slog::o;
+use slog::Drain;
+use slog_journald::JournaldDrain;
+use slog_syslog::Facility;
 
 use super::error::Result;
 
@@ -16,9 +17,11 @@ pub fn default_root_logger() -> Result<slog::Logger> {
     // Create drains
     let syslog_drain = default_syslog_drain().unwrap_or(default_discard()?);
     let term_drain = default_term_drain().unwrap_or(default_discard()?);
+    let journald_drain = default_journald_drain().unwrap_or(default_discard()?);
 
     // Merge drains
     let drain = slog::Duplicate(syslog_drain, term_drain).fuse();
+    let drain = slog::Duplicate(journald_drain, drain).fuse();
 
     // Create Logger
     let logger = slog::Logger::root(drain, o!("who" => "rust-starter"));
@@ -48,6 +51,13 @@ fn default_syslog_drain() -> Result<slog_async::Async> {
     let syslog = slog_syslog::unix_3164(Facility::LOG_USER)?;
 
     let drain = slog_async::Async::default(syslog.fuse());
+
+    Ok(drain)
+}
+
+fn default_journald_drain() -> Result<slog_async::Async> {
+    let journald = JournaldDrain.ignore_res();
+    let drain = slog_async::Async::default(journald);
 
     Ok(drain)
 }
