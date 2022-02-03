@@ -1,83 +1,91 @@
-use std::result;
-use std::backtrace::Backtrace;
+use std::fmt;
 use thiserror::Error;
 
+/// Result alias
+pub type Result<T> = std::result::Result<T, Error>;
 
-/// A type alias that forces the usage of the custom error type.
-pub type Result<T> = result::Result<T, GlobalError>;
-
-/// Custom error type for handling errors.
+/// Error type for this library.
 #[derive(Error, Debug)]
-pub enum GlobalError {
-    #[error("Configuration Error")]
-    ConfigError {
-        #[from]
-        source: config::ConfigError,
-        backtrace: Backtrace,
-    },
-    #[error("Poison Error")]
-    PoisonError,
-    #[error("IO Error")]
-    IoError {
-        #[from]
-        source: std::io::Error,
-        backtrace: Backtrace,
-    },
-    #[error("Clap Error")]
-    ClapError {
-        source: clap::Error,
-        backtrace: Backtrace,
-    },
-    #[error("Undefined Error")]
-    Undefined {
-        backtrace: Backtrace,
-    },
+pub struct Error {
+    pub msg: String,
+    source: Option<Box<dyn std::error::Error + Send + Sync>>,
 }
 
-impl<T> From<std::sync::PoisonError<T>> for GlobalError {
-    IoError,
-    ClapError,
-    LoggerError,
-}
-
-impl fmt::Display for ErrorKind {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Undefined Error")
+// Implement the Display trait for our Error type.
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.msg)
     }
 }
 
-impl From<ErrorKind> for Error {
-    fn from(kind: ErrorKind) -> Error {
+// Implement Default for Error
+impl Default for Error {
+    fn default() -> Self {
         Error {
-            inner: Context::new(kind),
+            msg: "".to_string(),
+            source: None,
         }
     }
 }
 
-impl From<Context<ErrorKind>> for Error {
-    fn from(inner: failure::Context<ErrorKind>) -> Error {
-        Error { inner }
+impl Error {
+    /// Create a new Error instance.
+    pub fn new(msg: &str) -> Self {
+        Error {
+            msg: msg.to_string(),
+            source: None,
+        }
+    }
+    /// Create a new Error instance with a source error.
+    pub fn with_source(msg: &str, source: Box<dyn std::error::Error + Send + Sync>) -> Self {
+        Error {
+            msg: msg.to_string(),
+            source: Some(source),
+        }
     }
 }
 
 impl From<config::ConfigError> for Error {
     fn from(err: config::ConfigError) -> Self {
         Error {
-            inner: err.context(ErrorKind::ConfigError),
+            msg: String::from("Config Error"),
+            source: Some(Box::new(err)),
         }
     }
 }
 
 impl<T> From<std::sync::PoisonError<T>> for Error {
     fn from(_err: std::sync::PoisonError<T>) -> Self {
-        GlobalError::PoisonError
+        Error {
+            msg: String::from("Poison Error"),
+            source: None,
+        }
+    }
+}
+
+impl From<std::io::Error> for Error {
+    fn from(err: std::io::Error) -> Self {
+        Error {
+            msg: String::from("IO Error"),
+            source: Some(Box::new(err)),
+        }
+    }
+}
+
+impl From<clap::Error> for Error {
+    fn from(err: clap::Error) -> Self {
+        Error {
+            msg: String::from("Clap Error"),
+            source: Some(Box::new(err)),
+        }
     }
 }
 
 impl From<log::SetLoggerError> for Error {
     fn from(err: log::SetLoggerError) -> Self {
         Error {
-            inner: err.context(ErrorKind::LoggerError),
+            msg: String::from("Logger Error"),
+            source: Some(Box::new(err)),
         }
     }
 }
