@@ -2,7 +2,7 @@
 name = "cli"
 version = "1.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
-description = "CLI interface"
+description = "CLI interface for rust-starter"
 edition = "2018"
 
 [dependencies]
@@ -10,8 +10,8 @@ utils = { path = "../utils" }
 core = { path = "../core" }
 
 [dependencies.clap]
-version = "3.0.0"
-features = ["cargo"]
+version = "3.0"
+features = ["cargo", "derive"]
 
 [dev-dependencies]
 assert_cmd = "1.0.1"
