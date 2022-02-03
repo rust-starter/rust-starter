@@ -1,6 +1,6 @@
 [package]
 name = "core"
-version = "0.0.1"
+version = "1.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
 description = "The application core code"
 edition = "2018"
@@ -9,7 +9,4 @@ edition = "2018"
 utils = { path = "../utils" }
 
 rand = "0.7.3"
-
-[dependencies.clap]
-version = "3.0.0-beta.2"
-features = ["yaml"]
+log = "0.4.11"

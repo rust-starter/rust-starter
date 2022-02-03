@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set variables
+      id: vars
+      run: |
+           echo "::set-output name=package_name::$(sed -En 's/name[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"      
+           echo "::set-output name=package_version::$(sed -En 's/version[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' Cargo.toml | head -1)"
+           echo "::set-output name=dockerhub_org::ruststarter"
+    - run: |
+           echo "${{steps.vars.outputs.package_name}}"
+           echo "${{steps.vars.outputs.package_version}}"
+           echo "${{steps.vars.outputs.dockerhub_org}}"
+    - run: mv docker/.dockerignore .dockerignore
+    - name: Build the Docker image
+      run: docker build --tag ${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}} --file docker/Dockerfile .
+    - run: docker tag ${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}} ruststarter/${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}}
+    - name: Docker authentication
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_TOKEN: ${{secrets.DOCKER_TOKEN}}
+      run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_TOKEN"
+    - name: Push Image
+      run: docker push ruststarter/${{steps.vars.outputs.package_name}}:${{steps.vars.outputs.package_version}}
