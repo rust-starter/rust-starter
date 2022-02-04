@@ -10,9 +10,9 @@ utils = { path = "../utils" }
 core = { path = "../core" }
 
 [dependencies.clap]
-version = "3.0"
+version = "3.0.14"
 features = ["cargo", "derive"]
 
 [dev-dependencies]
-assert_cmd = "1.0.1"
-predicates = "1.0.5"
+assert_cmd = "2.0.4"
+predicates = "2.1.1"
