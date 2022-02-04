@@ -36,7 +36,15 @@
 
 ## What's New?
 
-- Version 2.0.0-beta
+#### Version 2.0.0-beta
+What's planned for version 2.0?
+
+- [x] Upgrade to Clap 3
+- [ ] Merge AppConfig with Clap/Cli arguments
+- [ ] rustfmt update
+- [ ] Github release action
+- [ ] Sentry logging
+- [ ] Journald/Syslog/Sentry as features
 
 
 ## About
