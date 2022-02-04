@@ -5,12 +5,12 @@ use slog_syslog::Facility;
 
 use super::error::Result;
 
-pub fn setup_logging() -> Result<()> {
+pub fn setup_logging() -> Result<slog_scope::GlobalLoggerGuard> {
     // Setup Logging
-    let _guard = slog_scope::set_global_logger(default_root_logger()?);
-    let _log_guard = slog_stdlog::init().unwrap();
+    let guard = slog_scope::set_global_logger(default_root_logger()?);
+    let _log_guard = slog_stdlog::init()?;
 
-    Ok(())
+    Ok(guard)
 }
 
 pub fn default_root_logger() -> Result<slog::Logger> {
