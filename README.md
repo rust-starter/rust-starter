@@ -36,7 +36,8 @@
 
 ## What's New?
 
-- Version 1.0.0 is released.
+- Version 2.0.0-beta
+
 
 ## About
 
