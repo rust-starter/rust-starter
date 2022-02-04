@@ -5,6 +5,6 @@ jobs:
     name: TOC Generator
     runs-on: ubuntu-latest
     steps:
-      - uses: omarabid-forks/toc-generator-1@v4
+      - uses: omarabid-forks/toc-generator@v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
