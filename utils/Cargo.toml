@@ -5,8 +5,12 @@ authors = ["Abid Omar <contact@omarabid.com>"]
 description = "Various utilities and functionalities"
 edition = "2018"
 
+[features]
+nightly = []
+
 [dependencies]
 thiserror = "1.0"
+backtrace = "0.3"
 color-backtrace = "0.5.1"
 config = "0.10.1"
 lazy_static = "1.4"

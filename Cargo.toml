@@ -18,6 +18,9 @@ members = [
     "core",
 ]
 
+[features]
+nightly = ["utils/nightly"]
+
 [dependencies]
 utils = { path = "utils" }
 cli = { path = "cli"}
