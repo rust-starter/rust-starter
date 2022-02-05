@@ -8,6 +8,7 @@ edition = "2018"
 [dependencies]
 utils = { path = "../utils" }
 core = { path = "../core" }
+clap_complete = "3.0"
 
 [dependencies.clap]
 version = "3.0.14"

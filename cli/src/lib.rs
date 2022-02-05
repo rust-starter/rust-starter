@@ -1,11 +1,12 @@
 use std::path::PathBuf;
-use clap::{AppSettings, Parser, Subcommand};
+use clap::{AppSettings, Parser, IntoApp, Subcommand};
+use clap_complete::{generate, shells::{Bash, Fish, Zsh}};
 
 use core::commands;
 use utils::app_config::AppConfig;
 use utils::error::Result;
 
-#[derive(Parser)]
+#[derive(Parser, Debug)]
 #[clap(
     name = "rust-starter",
     author,
@@ -25,7 +26,7 @@ pub struct Cli {
     command: Commands,
 }
 
-#[derive(Subcommand)]
+#[derive(Subcommand, Debug)]
 enum Commands {
     #[clap(
         name = "hazard",
@@ -40,6 +41,15 @@ enum Commands {
     )]
     Error,
     #[clap(
+        name = "completion",
+        about = "Generate completion scripts",
+        long_about = None,
+        )]
+        Completion {
+            #[clap(subcommand)]
+            subcommand: CompletionSubcommand,
+        },
+    #[clap(
         name = "config",
         about = "Show Configuration",
         long_about = None,
@@ -47,9 +57,20 @@ enum Commands {
     Config,
 }
 
+#[derive(Subcommand, PartialEq, Debug)]
+enum CompletionSubcommand {
+    #[clap(about = "generate the autocompletion script for bash")]
+    Bash,
+    #[clap(about = "generate the autocompletion script for zsh")]
+    Zsh,
+    #[clap(about = "generate the autocompletion script for fish")]
+    Fish,
+}
+
 pub fn cli_match() -> Result<()> {
     // Parse the command line arguments
     let cli = Cli::parse();
+    let mut app = Cli::into_app();
 
     // Merge clap config file if the value is set
     AppConfig::merge_config(cli.config.as_deref())?;
@@ -58,6 +79,19 @@ pub fn cli_match() -> Result<()> {
     match &cli.command {
         Commands::Hazard => commands::hazard()?,
         Commands::Error => commands::simulate_error()?,
+        Commands::Completion {subcommand} => {
+            match subcommand {
+                CompletionSubcommand::Bash => {
+                    generate(Bash, &mut app, "rust-starter", &mut std::io::stdout());
+                }
+                CompletionSubcommand::Zsh => {
+                    generate(Zsh, &mut app, "rust-starter", &mut std::io::stdout());
+                }
+                CompletionSubcommand::Fish => {
+                    generate(Fish, &mut app, "rust-starter", &mut std::io::stdout());
+                }
+            }
+        }
         Commands::Config => commands::config()?,
     }
 
