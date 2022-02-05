@@ -1,3 +1,21 @@
-edition = "2018"
-format_strings = false
-fn_single_line = false
+# Compatibility:
+edition = "2021"
+
+# Comments:
+normalize_comments = true
+wrap_comments = false
+comment_width = 90      # small excess is okay but prefer 80
+
+# Arguments:
+use_small_heuristics = "Default"
+fn_args_layout = "Compressed"
+overflow_delimited_expr = true
+where_single_line = true
+
+# Misc:
+inline_attribute_width = 80
+blank_lines_upper_bound = 2
+reorder_impl_items = true
+
+# Ignored files:
+ignore = []
