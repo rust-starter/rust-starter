@@ -41,6 +41,7 @@
 What's planned for version 2.0?
 
 - [x] Upgrade to Clap 3
+- [ ] Shell Completion
 - [ ] Merge AppConfig with Clap/Cli arguments
 - [ ] rustfmt update
 - [ ] Github release action
