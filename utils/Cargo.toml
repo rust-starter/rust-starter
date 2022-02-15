@@ -21,6 +21,8 @@ slog-scope = "4.4.0"
 slog-async = "2.7.0"
 slog-stdlog = "4.1.0"
 slog-journald = "2.2.0"
+sentry = { version = "0.22", features=["transport", "log"] }
+sentry-slog = "0.19"
+clap = "3.0.14"
 log = "0.4.14"
 serde = { version = "1.0.136", features = ["derive"] }
-clap = "3.0.14"

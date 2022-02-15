@@ -4,6 +4,7 @@ use human_panic::setup_panic;
 #[cfg(debug_assertions)]
 extern crate better_panic;
 
+#[macro_use]
 extern crate log;
 
 use utils::app_config::AppConfig;
@@ -27,8 +28,14 @@ fn main() -> Result<()> {
             .install();
     }
 
-    let _guard = utils::logger::setup_logging()?;
+    let opts = sentry::ClientOptions {
+        ..Default::default()
+    };
+    let _guard = sentry::init(("https://b5bfb09c14824f49b50f691b2ab74697@o527993.ingest.sentry.io/5650907", opts));
 
+let _guard = utils::logger::setup_logging()?;
+
+    
     // Initialize Configuration
     let config_contents = include_str!("resources/default_config.toml");
     AppConfig::init(Some(config_contents))?;
