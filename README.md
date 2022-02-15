@@ -41,9 +41,9 @@
 What's planned for version 2.0?
 
 - [x] Upgrade to Clap 3
-- [ ] Shell Completion
+- [x] Shell Completion
 - [ ] Merge AppConfig with Clap/Cli arguments
-- [ ] rustfmt update
+- [x] rustfmt update
 - [ ] Github release action
 - [ ] Sentry logging
 - [ ] Journald/Syslog/Sentry as features
