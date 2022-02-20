@@ -1,5 +1,4 @@
 debug = false
-sentry_dsn = ""
 
 [database]
 url = "custom database url"
