@@ -44,9 +44,8 @@ What's planned for version 2.0?
 - [x] Shell Completion
 - [ ] Merge AppConfig with Clap/Cli arguments
 - [x] rustfmt update
-- [ ] Github release action
-- [ ] Sentry logging
-- [ ] Journald/Syslog/Sentry as features
+- [x] Github release action
+- [x] Journald/Syslog as features
 
 
 ## About
