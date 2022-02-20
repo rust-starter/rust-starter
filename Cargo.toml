@@ -20,6 +20,9 @@ members = [
 
 [features]
 nightly = ["utils/nightly"]
+termlog = ["utils/termlog"]
+journald = ["utils/journald"]
+syslog = ["utils/syslog"]
 
 [dependencies]
 utils = { path = "utils" }

@@ -15,13 +15,19 @@ pub fn setup_logging() -> Result<slog_scope::GlobalLoggerGuard> {
 
 pub fn default_root_logger() -> Result<slog::Logger> {
     // Create drains
-    let syslog_drain = default_syslog_drain().unwrap_or(default_discard()?);
-    let term_drain = default_term_drain().unwrap_or(default_discard()?);
-    let journald_drain = default_journald_drain().unwrap_or(default_discard()?);
+    let drain = slog::Duplicate(default_discard()?, default_discard()?).fuse();
 
     // Merge drains
-    let drain = slog::Duplicate(syslog_drain, term_drain).fuse();
-    let drain = slog::Duplicate(journald_drain, drain).fuse();
+    #[cfg(feature = "termlog")]
+    let drain = slog::Duplicate(default_term_drain().unwrap_or(default_discard()?), drain).fuse();
+    #[cfg(feature = "syslog")]
+    let drain = slog::Duplicate(default_syslog_drain().unwrap_or(default_discard()?), drain).fuse();
+    #[cfg(feature = "journald")]
+    let drain = slog::Duplicate(
+        default_journald_drain().unwrap_or(default_discard()?),
+        drain,
+    )
+    .fuse();
 
     // Create Logger
     let logger = slog::Logger::root(drain, o!("who" => "rust-starter"));

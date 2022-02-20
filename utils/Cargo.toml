@@ -7,6 +7,9 @@ edition = "2018"
 
 [features]
 nightly = []
+termlog = []
+syslog = []
+journald = []
 
 [dependencies]
 thiserror = "1.0.30"
