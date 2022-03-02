@@ -21,6 +21,10 @@ pub struct Cli {
     #[clap(short, long,parse(from_os_str), value_name = "FILE")]
     pub config: Option<PathBuf>,
 
+    /// Set a custom config file
+    #[clap(short, long, value_name = "DEBUG")]
+    pub debug: Option<bool>,
+
     /// Subcommands
     #[clap(subcommand)]
     command: Commands,
@@ -70,16 +74,19 @@ enum CompletionSubcommand {
 pub fn cli_match() -> Result<()> {
     // Parse the command line arguments
     let cli = Cli::parse();
-    let mut app = Cli::into_app();
 
     // Merge clap config file if the value is set
     AppConfig::merge_config(cli.config.as_deref())?;
+
+    let mut mrg = Cli::into_app();
+    AppConfig::merge_args(&mut mrg)?;
 
     // Execute the subcommand
     match &cli.command {
         Commands::Hazard => commands::hazard()?,
         Commands::Error => commands::simulate_error()?,
         Commands::Completion {subcommand} => {
+            let mut app = Cli::into_app();
             match subcommand {
                 CompletionSubcommand::Bash => {
                     generate(Bash, &mut app, "rust-starter", &mut std::io::stdout());

@@ -3,7 +3,7 @@ name = "cli"
 version = "2.0.0-beta"
 authors = ["Abid Omar <contact@omarabid.com>"]
 description = "CLI interface for rust-starter"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 utils = { path = "../utils" }

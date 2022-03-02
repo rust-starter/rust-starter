@@ -1,7 +1,18 @@
+use config::Config;
+use std::sync::{Arc, Mutex};
+use utils::app_config::CONFIG;
 use utils::app_config::*;
+
+fn tests_setup() {
+    let mut lock = CONFIG.lock().unwrap();
+    *lock = Config::builder().build().unwrap();
+    drop(lock);
+}
 
 #[test]
 fn fetch_config() {
+    tests_setup();
+
     // Initialize configuration
     let config_contents = include_str!("resources/test_config.toml");
     AppConfig::init(Some(config_contents)).unwrap();
@@ -16,6 +27,7 @@ fn fetch_config() {
 
 #[test]
 fn verify_get() {
+    tests_setup();
     // Initialize configuration
     let config_contents = include_str!("resources/test_config.toml");
     AppConfig::init(Some(config_contents)).unwrap();
@@ -26,14 +38,11 @@ fn verify_get() {
         AppConfig::get::<String>("database.url").unwrap(),
         "custom database url"
     );
-    assert_eq!(
-        AppConfig::get::<String>("sentry_dsn").unwrap(),
-        "sentry"
-    );
 }
 
 #[test]
 fn verify_set() {
+    tests_setup();
     // Initialize configuration
     let config_contents = include_str!("resources/test_config.toml");
     AppConfig::init(Some(config_contents)).unwrap();
