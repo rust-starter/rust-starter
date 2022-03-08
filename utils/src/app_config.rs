@@ -5,6 +5,7 @@ use std::path::Path;
 use std::sync::RwLock;
 
 use super::error::Result;
+use crate::types::LogLevel;
 
 // CONFIG static variable. It's actually an AppConfig
 // inside an RwLock.
@@ -20,6 +21,7 @@ pub struct Database {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AppConfig {
     pub debug: bool,
+    pub log_level: LogLevel,
     pub database: Database,
 }
 
@@ -51,8 +53,16 @@ impl AppConfig {
         Ok(())
     }
 
-    pub fn merge_args(app: &mut clap::App) -> Result<()> {
-        //dbg!(CONFIG.lock()?.clone().deserialize::<Vec<String>>());
+    pub fn merge_args(app: clap::App) -> Result<()> {
+        let args = app.get_matches();
+
+        if args.is_present("debug") {
+            AppConfig::set("debug", args.value_of("debug").unwrap())?;
+        }
+
+        if args.is_present("log_level") {
+            AppConfig::set("log_level", args.value_of("log_level").unwrap())?;
+        }
 
         Ok(())
     }

@@ -1,10 +1,12 @@
-use std::path::PathBuf;
+use std::{path::PathBuf, str::FromStr};
 use clap::{AppSettings, Parser, IntoApp, Subcommand};
 use clap_complete::{generate, shells::{Bash, Fish, Zsh}};
 
 use core::commands;
 use utils::app_config::AppConfig;
 use utils::error::Result;
+use utils::types::LogLevel;
+
 
 #[derive(Parser, Debug)]
 #[clap(
@@ -22,8 +24,12 @@ pub struct Cli {
     pub config: Option<PathBuf>,
 
     /// Set a custom config file
-    #[clap(short, long, value_name = "DEBUG")]
+    #[clap(name="debug", short, long="debug", value_name = "DEBUG")]
     pub debug: Option<bool>,
+
+    /// Set Log Level 
+    #[clap(name="log_level", short, long="log-level", value_name = "LOG_LEVEL")]
+    pub log_level: Option<LogLevel>,
 
     /// Subcommands
     #[clap(subcommand)]
@@ -78,8 +84,9 @@ pub fn cli_match() -> Result<()> {
     // Merge clap config file if the value is set
     AppConfig::merge_config(cli.config.as_deref())?;
 
-    let mut mrg = Cli::into_app();
-    AppConfig::merge_args(&mut mrg)?;
+    let app = Cli::into_app();
+    
+    AppConfig::merge_args(app)?;
 
     // Execute the subcommand
     match &cli.command {

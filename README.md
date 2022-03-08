@@ -42,8 +42,8 @@ What's planned for version 2.0?
 
 - [x] Upgrade to Clap 3
 - [x] Shell Completion
-- [ ] Merge AppConfig with Clap/Cli arguments
-- [ ] use ConfigBuilder instead of Config
+- [x] Merge AppConfig with Clap/Cli arguments
+- [x] use ConfigBuilder instead of Config
 - [x] rustfmt update
 - [x] Github release action
 - [x] Journald/Syslog as features
