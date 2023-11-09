@@ -12,11 +12,7 @@ Rust Starter aims to provide high quality components to bootstrap your Rust CLI 
 """
 
 [workspace]
-members = [
-    "utils",
-    "cli",
-    "core",
-]
+members = ["utils", "cli", "core"]
 
 [features]
 nightly = ["utils/nightly"]
@@ -26,18 +22,18 @@ syslog = ["utils/syslog"]
 
 [dependencies]
 utils = { path = "utils" }
-cli = { path = "cli"}
+cli = { path = "cli" }
 core = { path = "core" }
-human-panic = "1.0.3"
+human-panic = "1.2.2"
 better-panic = "0.3.0"
-log = "0.4.14"
+log = "0.4.20"
 
 [dev-dependencies]
-assert_cmd = "2.0.4"
-predicates = "2.1.1"
+assert_cmd = "2.0.12"
+predicates = "3.0.4"
 
 [profile.dev]
-opt-level=0
+opt-level = 0
 debug = true
 rpath = false
 lto = false
@@ -45,7 +41,7 @@ debug-assertions = true
 codegen-units = 4
 
 [profile.release]
-opt-level=3
+opt-level = 3
 debug = false
 rpath = false
 lto = true
