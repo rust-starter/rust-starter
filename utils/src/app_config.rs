@@ -16,6 +16,7 @@ lazy_static! {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Database {
     pub url: String,
+    pub variable: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

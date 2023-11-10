@@ -1,4 +1,5 @@
 debug = false
-
+log_level = "info"
 [database]
 url = "custom database url"
+variable = "my var"

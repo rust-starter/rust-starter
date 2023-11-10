@@ -1,24 +1,32 @@
+use std::sync::Once;
 use utils::app_config::*;
+
+static INIT: Once = Once::new();
+
+pub fn initialize() {
+    INIT.call_once(|| {
+        // Initialize configuration
+        let config_contents = include_str!("resources/test_config.toml");
+        AppConfig::init(Some(config_contents)).unwrap();
+    });
+}
 
 #[test]
 fn fetch_config() {
-    // Initialize configuration
-    let config_contents = include_str!("resources/test_config.toml");
-    AppConfig::init(Some(config_contents)).unwrap();
+    initialize();
 
     // Fetch an instance of Config
     let config = AppConfig::fetch().unwrap();
 
     // Check the values
     assert_eq!(config.debug, false);
+    //dbg!(&config.database.url);
     assert_eq!(config.database.url, "custom database url");
 }
 
 #[test]
 fn verify_get() {
-    // Initialize configuration
-    let config_contents = include_str!("resources/test_config.toml");
-    AppConfig::init(Some(config_contents)).unwrap();
+    initialize();
 
     // Check value with get
     assert_eq!(AppConfig::get::<bool>("debug").unwrap(), false);
@@ -30,16 +38,14 @@ fn verify_get() {
 
 #[test]
 fn verify_set() {
-    // Initialize configuration
-    let config_contents = include_str!("resources/test_config.toml");
-    AppConfig::init(Some(config_contents)).unwrap();
+    initialize();
 
     // Set a field
-    AppConfig::set("database.url", "new url").unwrap();
+    AppConfig::set("database.variable", "new value").unwrap();
 
     // Fetch a new instance of Config
     let config = AppConfig::fetch().unwrap();
 
     // Check value was modified
-    assert_eq!(config.database.url, "new url");
+    assert_eq!(config.database.variable, "new value");
 }
