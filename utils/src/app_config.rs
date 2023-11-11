@@ -10,7 +10,7 @@ use crate::types::LogLevel;
 // CONFIG static variable. It's actually an AppConfig
 // inside an RwLock.
 lazy_static! {
-    pub static ref CONFIG: RwLock<Config> = RwLock::new(Config::new());
+    pub static ref CONFIG: RwLock<Config> = RwLock::new(Config::builder().build().unwrap());
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -29,7 +29,7 @@ pub struct AppConfig {
 impl AppConfig {
     /// Initialize AppConfig.
     pub fn init(default_config: Option<&str>) -> Result<()> {
-        let mut settings = Config::new();
+        let mut settings = Config::builder().build()?;
 
         // Embed file into executable
         // This macro will embed the configuration file into the
@@ -109,6 +109,18 @@ impl AppConfig {
         let config_clone = r.deref().clone();
 
         // Coerce Config into AppConfig
-        Ok(config_clone.try_into()?)
+        let app_config: AppConfig = config_clone.into();
+        Ok(app_config)
+    }
+}
+
+// Coerce Config into AppConfig
+impl From<Config> for AppConfig {
+    fn from(config: Config) -> Self {
+        AppConfig {
+            debug: config.get_bool("debug").unwrap(),
+            log_level: config.get::<LogLevel>("log_level").unwrap(),
+            database: config.get::<Database>("database").unwrap(),
+        }
     }
 }
