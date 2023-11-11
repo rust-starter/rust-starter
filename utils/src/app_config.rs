@@ -54,15 +54,15 @@ impl AppConfig {
         Ok(())
     }
 
-    pub fn merge_args(app: clap::App) -> Result<()> {
-        let args = app.get_matches();
-
-        if args.is_present("debug") {
-            AppConfig::set("debug", args.value_of("debug").unwrap())?;
+    pub fn merge_args(args: clap::ArgMatches) -> Result<()> {
+        if args.contains_id("debug") {
+            let value: &str = *args.get_one("debug").unwrap();
+            AppConfig::set("debug", &value.to_string())?;
         }
 
-        if args.is_present("log_level") {
-            AppConfig::set("log_level", args.value_of("log_level").unwrap())?;
+        if args.contains_id("log_level") {
+            let value: &str = *args.get_one("log_level").unwrap();
+            AppConfig::set("log_level", &value.to_string())?;
         }
 
         Ok(())

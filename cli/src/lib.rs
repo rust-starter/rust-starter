@@ -1,5 +1,5 @@
 use std::{path::PathBuf, str::FromStr};
-use clap::{AppSettings, Parser, IntoApp, Subcommand};
+use clap::{Parser, Subcommand, CommandFactory};
 use clap_complete::{generate, shells::{Bash, Fish, Zsh}};
 
 use core::commands;
@@ -9,26 +9,27 @@ use utils::types::LogLevel;
 
 
 #[derive(Parser, Debug)]
-#[clap(
+#[command(
     name = "rust-starter",
     author,
     about,
     long_about = "Rust Starter CLI",
     version
 )]
-#[clap(setting = AppSettings::SubcommandRequired)]
-#[clap(global_setting(AppSettings::DeriveDisplayOrder))]
+//TODO: #[clap(setting = AppSettings::SubcommandRequired)]
+//TODO: #[clap(global_setting(AppSettings::DeriveDisplayOrder))]
 pub struct Cli {
     /// Set a custom config file
-    #[clap(short, long,parse(from_os_str), value_name = "FILE")]
+    /// TODO: parse(from_os_str)
+    #[arg(short, long, value_name = "FILE")]
     pub config: Option<PathBuf>,
 
     /// Set a custom config file
-    #[clap(name="debug", short, long="debug", value_name = "DEBUG")]
+    #[arg(name="debug", short, long="debug", value_name = "DEBUG")]
     pub debug: Option<bool>,
 
     /// Set Log Level 
-    #[clap(name="log_level", short, long="log-level", value_name = "LOG_LEVEL")]
+    #[arg(name="log_level", short, long="log-level", value_name = "LOG_LEVEL")]
     pub log_level: Option<LogLevel>,
 
     /// Subcommands
@@ -84,16 +85,17 @@ pub fn cli_match() -> Result<()> {
     // Merge clap config file if the value is set
     AppConfig::merge_config(cli.config.as_deref())?;
 
-    let app = Cli::into_app();
+    let app = Cli::command();
+    let matches = app.get_matches();
     
-    AppConfig::merge_args(app)?;
+    AppConfig::merge_args(matches)?;
 
     // Execute the subcommand
     match &cli.command {
         Commands::Hazard => commands::hazard()?,
         Commands::Error => commands::simulate_error()?,
         Commands::Completion {subcommand} => {
-            let mut app = Cli::into_app();
+            let mut app = Cli::command();
             match subcommand {
                 CompletionSubcommand::Bash => {
                     generate(Bash, &mut app, "rust-starter", &mut std::io::stdout());
