@@ -9,8 +9,7 @@
 </div>
 <br/>
 
-
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/omarabid/rust-starter/blob/master/LICENSE)  [![Gitter](https://badges.gitter.im/rust-starter/community.svg)](https://gitter.im/rust-starter/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/omarabid/rust-starter/blob/master/LICENSE) [![Gitter](https://badges.gitter.im/rust-starter/community.svg)](https://gitter.im/rust-starter/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Tests](https://github.com/rust-starter/rust-starter/actions/workflows/tests.yml/badge.svg)](https://github.com/rust-starter/rust-starter/actions/workflows/tests.yml)
 [![Build](https://github.com/rust-starter/rust-starter/actions/workflows/build.yml/badge.svg)](https://github.com/rust-starter/rust-starter/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/rust-starter/rust-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/rust-starter/rust-starter)
@@ -21,10 +20,11 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [What's New?](#whats-new)
-    - [Version 2.0.0-beta](#version-200-beta)
+  - [Version 2.0.0](#version-200)
 - [About](#about)
 - [FAQ](#faq)
 - [Features](#features)
@@ -37,17 +37,21 @@
 
 ## What's New?
 
-#### Version 2.0.0-beta
-What's planned for version 2.0?
+#### Version 2.0.0
 
-- [x] Upgrade to Clap 3
+What's new in Version 2.0?
+
+- [x] Upgrade to Clap 4.x
 - [x] Shell Completion
 - [x] Merge AppConfig with Clap/Cli arguments
 - [x] use ConfigBuilder instead of Config
 - [x] rustfmt update
 - [x] Github release action
-- [x] Journald/Syslog as features
 
+Planned for a 2.x release
+
+- [x] Journald/Syslog as features
+- [x] Fix CI/CD actions and Docker image
 
 ## About
 
@@ -85,4 +89,3 @@ Rust Starter stricltly adheres to the [SemVer](https://semver.org/) Semantic Ver
 ## License
 
 `rust-starter` is licensed under the MIT license. Please read the [LICENSE](LICENSE) file in this repository for more information.
-
