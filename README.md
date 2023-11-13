@@ -20,11 +20,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
 - [What's New?](#whats-new)
-  - [Version 2.0.0](#version-200)
+    - [Version 2.0.0](#version-200)
 - [About](#about)
 - [FAQ](#faq)
 - [Features](#features)
