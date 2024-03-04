@@ -56,12 +56,13 @@ impl AppConfig {
 
     pub fn merge_args(args: clap::ArgMatches) -> Result<()> {
         if args.contains_id("debug") {
-            let value: &str = *args.get_one("debug").unwrap();
+            let value: &str = *args.get_one("debug").unwrap_or(&"false");
+
             AppConfig::set("debug", &value.to_string())?;
         }
 
         if args.contains_id("log_level") {
-            let value: &str = *args.get_one("log_level").unwrap();
+            let value: &str = *args.get_one("log_level").unwrap_or(&"info");
             AppConfig::set("log_level", &value.to_string())?;
         }
 
@@ -72,9 +73,9 @@ impl AppConfig {
         // Merge settings with config file if there is one
         if let Some(config_file_path) = config_file {
             {
-                CONFIG
-                    .write()?
-                    .merge(config::File::with_name(config_file_path.to_str().unwrap()))?;
+                CONFIG.write()?.merge(config::File::with_name(
+                    config_file_path.to_str().unwrap_or(""),
+                ))?;
             }
         }
         Ok(())
@@ -109,18 +110,21 @@ impl AppConfig {
         let config_clone = r.deref().clone();
 
         // Coerce Config into AppConfig
-        let app_config: AppConfig = config_clone.into();
+        let app_config: AppConfig = config_clone.try_into()?;
         Ok(app_config)
     }
 }
 
 // Coerce Config into AppConfig
-impl From<Config> for AppConfig {
-    fn from(config: Config) -> Self {
-        AppConfig {
-            debug: config.get_bool("debug").unwrap(),
-            log_level: config.get::<LogLevel>("log_level").unwrap(),
-            database: config.get::<Database>("database").unwrap(),
-        }
+
+impl TryFrom<Config> for AppConfig {
+    type Error = crate::error::Error;
+
+    fn try_from(config: Config) -> Result<Self> {
+        Ok(AppConfig {
+            debug: config.get_bool("debug")?,
+            log_level: config.get::<LogLevel>("log_level")?,
+            database: config.get::<Database>("database")?,
+        })
     }
 }
