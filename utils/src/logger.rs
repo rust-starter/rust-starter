@@ -1,5 +1,6 @@
 use slog::o;
 use slog::Drain;
+#[cfg(target_os = "linux")]
 use slog_journald::JournaldDrain;
 use slog_syslog::Facility;
 
@@ -23,6 +24,7 @@ pub fn default_root_logger() -> Result<slog::Logger> {
     #[cfg(feature = "syslog")]
     let drain = slog::Duplicate(default_syslog_drain().unwrap_or(default_discard()?), drain).fuse();
     #[cfg(feature = "journald")]
+    #[cfg(target_os = "linux")]
     let drain = slog::Duplicate(
         default_journald_drain().unwrap_or(default_discard()?),
         drain,
@@ -61,6 +63,7 @@ fn default_syslog_drain() -> Result<slog_async::Async> {
     Ok(drain)
 }
 
+#[cfg(target_os = "linux")]
 fn default_journald_drain() -> Result<slog_async::Async> {
     let journald = JournaldDrain.ignore_res();
     let drain = slog_async::Async::default(journald);
