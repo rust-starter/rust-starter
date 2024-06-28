@@ -43,6 +43,7 @@ fn default_discard() -> Result<slog_async::Async> {
 }
 
 // term drain: Log to Terminal
+#[allow(dead_code)]
 fn default_term_drain() -> Result<slog_async::Async> {
     let plain = slog_term::PlainSyncDecorator::new(std::io::stdout());
     let term = slog_term::FullFormat::new(plain);
@@ -53,6 +54,7 @@ fn default_term_drain() -> Result<slog_async::Async> {
 }
 
 // syslog drain: Log to syslog
+#[allow(dead_code)]
 fn default_syslog_drain() -> Result<slog_async::Async> {
     let syslog = slog_syslog::unix_3164(Facility::LOG_USER)?;
 
@@ -61,6 +63,7 @@ fn default_syslog_drain() -> Result<slog_async::Async> {
     Ok(drain)
 }
 
+#[allow(dead_code)]
 fn default_journald_drain() -> Result<slog_async::Async> {
     let journald = JournaldDrain.ignore_res();
     let drain = slog_async::Async::default(journald);
