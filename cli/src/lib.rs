@@ -1,4 +1,4 @@
-use std::{path::PathBuf, str::FromStr};
+use std::{path::PathBuf};
 use clap::{Parser, Subcommand, CommandFactory};
 use clap_complete::{generate, shells::{Bash, Fish, Zsh}};
 
