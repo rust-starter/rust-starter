@@ -24,9 +24,9 @@ syslog = ["utils/syslog"]
 utils = { path = "utils" }
 cli = { path = "cli" }
 core = { path = "core" }
-human-panic = "1.2.2"
+human-panic = "2.0.0"
 better-panic = "0.3.0"
-log = "0.4.20"
+log = "0.4.22"
 
 [dev-dependencies]
 assert_cmd = "2.0.12"

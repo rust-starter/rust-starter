@@ -12,18 +12,18 @@ syslog = []
 journald = []
 
 [dependencies]
-thiserror = "1.0.50"
-backtrace = "0.3.69"
+thiserror = "1.0.63"
+backtrace = "0.3.73"
 color-backtrace = "0.6.1"
 config = "0.13.3"
-lazy_static = "1.4.0"
+lazy_static = "1.5.0"
 slog = "2.7.0"
 slog-syslog = "0.13.0"
-slog-term = "2.9.0"
+slog-term = "2.9.1"
 slog-scope = "4.4.0"
 slog-async = "2.8.0"
 slog-stdlog = "4.1.1"
 slog-journald = "2.2.0"
-clap = "4.4.7"
-log = "0.4.20"
-serde = { version = "1.0.192", features = ["derive"] }
+clap = "4.5.9"
+log = "0.4.22"
+serde = { version = "1.0.204", features = ["derive"] }
