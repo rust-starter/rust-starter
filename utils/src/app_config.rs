@@ -1,9 +1,9 @@
+use config::builder::DefaultState;
 use config::{Config, ConfigBuilder, Environment};
 use lazy_static::{__Deref, lazy_static};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
 use std::sync::RwLock;
-use config::builder::DefaultState;
 
 use super::error::Result;
 use crate::types::LogLevel;
@@ -42,7 +42,6 @@ impl AppConfig {
                 config::FileFormat::Toml,
             ));
         }
-
 
         // Merge settings with env variables
         builder = builder.add_source(Environment::with_prefix("APP")); // TODO: Merge settings with Clap Settings Arguments
@@ -96,8 +95,8 @@ impl AppConfig {
 
     // Get a single value
     pub fn get<'de, T>(key: &'de str) -> Result<T>
-        where
-            T: serde::Deserialize<'de>,
+    where
+        T: serde::Deserialize<'de>,
     {
         Ok(BUILDER.read()?.deref().clone().build()?.get::<T>(key)?)
     }
