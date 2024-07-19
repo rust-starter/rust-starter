@@ -1,7 +1,8 @@
 use slog::o;
 use slog::Drain;
-#[cfg(target_os = "linux")]
+#[cfg(all(target_os = "linux", feature = "journald"))]
 use slog_journald::JournaldDrain;
+#[cfg(feature = "syslog")]
 use slog_syslog::Facility;
 
 use super::error::Result;
@@ -9,7 +10,7 @@ use super::error::Result;
 pub fn setup_logging() -> Result<slog_scope::GlobalLoggerGuard> {
     // Setup Logging
     let guard = slog_scope::set_global_logger(default_root_logger()?);
-    let _log_guard = slog_stdlog::init()?;
+    slog_stdlog::init()?;
 
     Ok(guard)
 }
@@ -45,6 +46,7 @@ fn default_discard() -> Result<slog_async::Async> {
 }
 
 // term drain: Log to Terminal
+#[cfg(feature = "termlog")]
 fn default_term_drain() -> Result<slog_async::Async> {
     let plain = slog_term::PlainSyncDecorator::new(std::io::stdout());
     let term = slog_term::FullFormat::new(plain);
@@ -55,6 +57,7 @@ fn default_term_drain() -> Result<slog_async::Async> {
 }
 
 // syslog drain: Log to syslog
+#[cfg(feature = "syslog")]
 fn default_syslog_drain() -> Result<slog_async::Async> {
     let syslog = slog_syslog::unix_3164(Facility::LOG_USER)?;
 
@@ -63,7 +66,7 @@ fn default_syslog_drain() -> Result<slog_async::Async> {
     Ok(drain)
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(all(target_os = "linux", feature = "journald"))]
 fn default_journald_drain() -> Result<slog_async::Async> {
     let journald = JournaldDrain.ignore_res();
     let drain = slog_async::Async::default(journald);
