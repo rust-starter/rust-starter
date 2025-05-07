@@ -8,12 +8,12 @@ edition = "2021"
 [dependencies]
 utils = { path = "../utils" }
 core = { path = "../core" }
-clap_complete = "4.5.8"
+clap_complete = "4.5.50"
 
 [dependencies.clap]
-version = "4.5.9"
+version = "4.5.37"
 features = ["cargo", "derive"]
 
 [dev-dependencies]
-assert_cmd = "2.0.14"
-predicates = "3.1.0"
+assert_cmd = "2.0.17"
+predicates = "3.1.3"

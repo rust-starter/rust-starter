@@ -1,6 +1,6 @@
 [package]
 name = "utils"
-version = "2.0.0"
+version = "2.0.1"
 authors = ["Abid Omar <contact@omarabid.com>"]
 description = "Various utilities and functionalities"
 edition = "2021"
@@ -12,10 +12,10 @@ syslog = []
 journald = []
 
 [dependencies]
-thiserror = "1.0.63"
-backtrace = "0.3.73"
-color-backtrace = "0.6.1"
-config = "0.13.3"
+thiserror = "2.0.12"
+backtrace = "0.3.75"
+color-backtrace = "0.7.0"
+config = "0.15.11"
 lazy_static = "1.5.0"
 slog = "2.7.0"
 slog-syslog = "0.13.0"
@@ -25,7 +25,7 @@ slog-async = "2.8.0"
 slog-stdlog = "4.1.1"
 [target.'cfg(target_os = "linux")'.dependencies]
 slog-journald = "2.2.0"
-clap = "4.5.9"
-log = "0.4.22"
-serde = { version = "1.0.204", features = ["derive"] }
+clap = "4.5.37"
+log = "0.4.27"
+serde = { version = "1.0.219", features = ["derive"] }
 

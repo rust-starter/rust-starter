@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 utils = { path = "../utils" }
 
-rand = "0.8.5"
-log = "0.4.20"
+rand = "0.9.1"
+log = "0.4.27"
