@@ -3,7 +3,7 @@ name = "utils"
 version = "2.0.0"
 authors = ["Abid Omar <contact@omarabid.com>"]
 description = "Various utilities and functionalities"
-edition = "2021"
+edition = "2024"
 
 [features]
 nightly = []
@@ -12,20 +12,18 @@ syslog = []
 journald = []
 
 [dependencies]
-thiserror = "1.0.63"
-backtrace = "0.3.73"
-color-backtrace = "0.6.1"
-config = "0.13.3"
-lazy_static = "1.5.0"
+thiserror = "2.0.17"
+backtrace = "0.3.76"
+color-backtrace = "0.7.2"
+config = "0.15.19"
 slog = "2.7.0"
 slog-syslog = "0.13.0"
-slog-term = "2.9.1"
+slog-term = "2.9.2"
 slog-scope = "4.4.0"
 slog-async = "2.8.0"
 slog-stdlog = "4.1.1"
 [target.'cfg(target_os = "linux")'.dependencies]
 slog-journald = "2.2.0"
-clap = "4.5.9"
-log = "0.4.22"
-serde = { version = "1.0.204", features = ["derive"] }
-
+clap = "4.5.53"
+log = "0.4.29"
+serde = { version = "1.0.228", features = ["derive"] }

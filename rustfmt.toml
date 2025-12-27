@@ -2,20 +2,20 @@
 edition = "2021"
 
 # Comments:
-normalize_comments = true
-wrap_comments = false
-comment_width = 90      # small excess is okay but prefer 80
+# normalize_comments = true  # unstable
+# wrap_comments = false      # unstable
+# comment_width = 90         # unstable
 
 # Arguments:
 use_small_heuristics = "Default"
-fn_args_layout = "Compressed"
-overflow_delimited_expr = true
-where_single_line = true
+# fn_args_layout = "Compressed"   # deprecated, use fn_params_layout
+# overflow_delimited_expr = true  # unstable
+# where_single_line = true        # unstable
 
 # Misc:
-inline_attribute_width = 80
-blank_lines_upper_bound = 2
-reorder_impl_items = true
+# inline_attribute_width = 80     # unstable
+# blank_lines_upper_bound = 2     # unstable
+# reorder_impl_items = true       # unstable
 
 # Ignored files:
-ignore = []
+# ignore = []                     # unstable

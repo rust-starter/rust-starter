@@ -1,12 +1,14 @@
+use clap::{CommandFactory, Parser, Subcommand};
+use clap_complete::{
+    generate,
+    shells::{Bash, Fish, Zsh},
+};
 use std::path::PathBuf;
-use clap::{Parser, Subcommand, CommandFactory};
-use clap_complete::{generate, shells::{Bash, Fish, Zsh}};
 
 use core::commands;
 use utils::app_config::AppConfig;
 use utils::error::Result;
 use utils::types::LogLevel;
-
 
 #[derive(Parser, Debug)]
 #[command(
@@ -25,11 +27,16 @@ pub struct Cli {
     pub config: Option<PathBuf>,
 
     /// Set a custom config file
-    #[arg(name="debug", short, long="debug", value_name = "DEBUG")]
+    #[arg(name = "debug", short, long = "debug", value_name = "DEBUG")]
     pub debug: Option<bool>,
 
-    /// Set Log Level 
-    #[arg(name="log_level", short, long="log-level", value_name = "LOG_LEVEL")]
+    /// Set Log Level
+    #[arg(
+        name = "log_level",
+        short,
+        long = "log-level",
+        value_name = "LOG_LEVEL"
+    )]
     pub log_level: Option<LogLevel>,
 
     /// Subcommands
@@ -42,13 +49,13 @@ enum Commands {
     #[clap(
         name = "hazard",
         about = "Generate a hazardous occurance",
-        long_about = None, 
+        long_about = None,
     )]
     Hazard,
     #[clap(
         name = "error",
         about = "Simulate an error",
-        long_about = None, 
+        long_about = None,
     )]
     Error,
     #[clap(
@@ -56,10 +63,10 @@ enum Commands {
         about = "Generate completion scripts",
         long_about = None,
         )]
-        Completion {
-            #[clap(subcommand)]
-            subcommand: CompletionSubcommand,
-        },
+    Completion {
+        #[clap(subcommand)]
+        subcommand: CompletionSubcommand,
+    },
     #[clap(
         name = "config",
         about = "Show Configuration",
@@ -87,14 +94,14 @@ pub fn cli_match() -> Result<()> {
 
     let app = Cli::command();
     let matches = app.get_matches();
-    
+
     AppConfig::merge_args(matches)?;
 
     // Execute the subcommand
     match &cli.command {
         Commands::Hazard => commands::hazard()?,
         Commands::Error => commands::simulate_error()?,
-        Commands::Completion {subcommand} => {
+        Commands::Completion { subcommand } => {
             let mut app = Cli::command();
             match subcommand {
                 CompletionSubcommand::Bash => {

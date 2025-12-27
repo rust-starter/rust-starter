@@ -11,13 +11,13 @@ debug TEST:
 	cargo test --test {{TEST}} --features debug
 
 run-tests:
-	cargo test --all
+	cargo test --all --all-features
 
 bench:
 	cargo bench
 
 lint:
-	cargo clippy
+	cargo clippy --all-targets --all-features
 
 graph:
     rm -f cargo-graph.dot
@@ -29,7 +29,19 @@ clean:
 	cargo clean
 	find . -type f -name "*.orig" -exec rm {} \;
 	find . -type f -name "*.bk" -exec rm {} \;
-	find . -type f -name ".*~" -exec rm {} \;	
+	find . -type f -name ".*~" -exec rm {} \;
+
+# Format code
+fmt:
+	cargo fmt --all
+
+# Check code without building
+check:
+	cargo check --all-targets --all-features
+
+# Fix common issues automatically
+fix:
+	cargo fix --all-targets --allow-dirty --allow-staged	
 
 build-image:
     mv docker/.dockerignore .dockerignore

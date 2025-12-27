@@ -1,5 +1,6 @@
 use super::error;
 use super::hazard;
+use log::info;
 
 use utils::app_config::AppConfig;
 use utils::error::Result;

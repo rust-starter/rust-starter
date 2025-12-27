@@ -1,18 +1,17 @@
 use config::builder::DefaultState;
 use config::{Config, ConfigBuilder, Environment};
-use lazy_static::{__Deref, lazy_static};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
-use std::sync::RwLock;
+use std::sync::{LazyLock, RwLock};
 
-use super::error::Result;
+use super::error::{Error, Result};
 use crate::types::LogLevel;
 
 // CONFIG static variable. It's actually an AppConfig
 // inside an RwLock.
-lazy_static! {
-    pub static ref BUILDER: RwLock<ConfigBuilder<DefaultState>> = RwLock::new(Config::builder());
-}
+pub static BUILDER: LazyLock<RwLock<ConfigBuilder<DefaultState>>> = LazyLock::new(|| {
+    RwLock::new(Config::builder())
+});
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Database {
@@ -74,7 +73,9 @@ impl AppConfig {
         // Merge settings with config file if there is one
         if let Some(config_file_path) = config_file {
             {
-                let mut w = BUILDER.write().unwrap();
+                let mut w = BUILDER
+                    .write()
+                    .map_err(|_| Error::poison("AppConfig::BUILDER (merge_config)"))?;
                 *w = w.clone().add_source(config::File::with_name(
                     config_file_path.to_str().unwrap_or(""),
                 ));
@@ -86,7 +87,9 @@ impl AppConfig {
     // Set CONFIG
     pub fn set(key: &str, value: &str) -> Result<()> {
         {
-            let mut w = BUILDER.write().unwrap();
+            let mut w = BUILDER
+                .write()
+                .map_err(|_| Error::poison("AppConfig::BUILDER (set)"))?;
             *w = w.clone().set_override(key, value)?;
         }
 
@@ -98,7 +101,12 @@ impl AppConfig {
     where
         T: serde::Deserialize<'de>,
     {
-        Ok(BUILDER.read()?.deref().clone().build()?.get::<T>(key)?)
+        Ok(BUILDER
+            .read()
+            .map_err(|_| Error::poison("AppConfig::BUILDER (get)"))?
+            .clone()
+            .build()?
+            .get::<T>(key)?)
     }
 
     // Get CONFIG
@@ -106,10 +114,12 @@ impl AppConfig {
     // This means you have to fetch this again if you changed the configuration.
     pub fn fetch() -> Result<AppConfig> {
         // Get a Read Lock from RwLock
-        let r = BUILDER.read()?;
+        let r = BUILDER
+            .read()
+            .map_err(|_| Error::poison("AppConfig::BUILDER (fetch)"))?;
 
         // Clone the Config object
-        let config_clone = r.deref().clone().build()?;
+        let config_clone = r.clone().build()?;
 
         // Coerce Config into AppConfig
         let app_config: AppConfig = config_clone.try_into()?;

@@ -65,7 +65,7 @@ For the Full FAQ, check the [website](https://rust-starter.github.io/#faq)
 ## Features
 
 - [Clap](https://github.com/clap-rs/clap) for Command Line Argument parsing.
-- Error Chaining with [Failure](https://github.com/rust-lang-nursery/failure).
+- Error Chaining with [thiserror](https://github.com/dtolnay/thiserror).
 - Configuration management with [config-rs](https://github.com/mehcode/config-rs).
 - Multi-Drain, async Logging with [slog](https://github.com/slog-rs/slog).
 - Static binaries with [rust-musl-builder](https://github.com/emk/rust-musl-builder).
